@@ -9,6 +9,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,9 @@ import { environment } from 'src/environments/environment';
     FooterComponent,
     HomeComponent,
     ProductsListComponent,
+    ProductDetailsComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [
     { provide: 'API_BASE_URL', useValue: environment.apiBaseUrl }, // Provide the backend URL
     { provide: 'API_URL_GET_IMAGE', useValue: environment.apiUrlGetImage }, // Provide the backend URL

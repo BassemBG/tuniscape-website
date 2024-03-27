@@ -1,0 +1,192 @@
+  /* product-details.component.css */
+  .product-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 20%;
+  }
+  
+  .images-container {
+    flex: 1;
+    padding: 10px 30px;
+    min-width: 50%; /* Take up half of the screen */
+  }
+  
+  .main-image img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+
+  }
+  
+  .other-images {
+    flex: 1;
+    max-width: 50%; /* Take up half of the screen */
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .other-images img {
+    width: calc(33.33% - 10px); /* Adjust the percentage and margin as needed */
+    height: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .other-images img:hover {
+    cursor: pointer;
+  }
+  
+  /* Clearfix to prevent wrapping issues in flex containers */
+  .other-images::after {
+    content: "";
+    flex: auto;
+  }
+  
+  
+  .details-container {
+    flex: 3;
+    padding: 50px 20px;
+
+  }
+  
+  .details-container h2 {
+    font-size: 3em;
+  }
+
+  .price {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  
+  .options {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  label {
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 1em;
+  }
+  
+  select, input {
+    padding: 4px;
+    margin-bottom: 10px;
+  }
+
+
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+  #quantity {
+    margin: auto;
+    width: 50px;
+    border: none;
+  }
+
+  button {
+    flex: 1;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: 1px solid rgb(107, 106, 106);
+    cursor: pointer;
+  }
+
+  .buttons {
+    display: flex;
+  }
+  
+  .buttons button:hover {
+    transform: scale(1.05);
+    animation: ease-in;
+    cursor: pointer;
+
+  }
+  
+  .buttons button {
+    padding: 20px;
+    font-size: 1em;
+    margin: 1.5em;
+    transition: transform 0.3s ease-in-out;
+
+  }
+
+
+  button[disabled] {
+    cursor: not-allowed; /* Change cursor on disabled state */
+  }
+
+  button[disabled]:hover {
+    background-color: white;  
+    color: black;
+    transform: scale(1);
+}
+
+  .add-cart {
+    background-color: white;
+    border: 3px solid black;
+    color: black;
+  }
+
+  .buy-now {
+    background-color: black;
+    color: white;
+  }
+
+  .description {
+    margin-top: 5em;
+    font-size: 1.2em;
+  }
+
+
+  @media only screen and (max-width: 768px) {
+  
+    .details-container {
+        font-size: 0.8em;
+    }
+
+    .details-container h2,
+    .details-container>p {
+        padding-left: 20px;
+    }
+
+    .options {
+        font-size: 1em;
+    }
+
+    select option{
+        font-size: 0.5em;
+        padding: 10px;
+    }
+
+   
+
+    .product-details-container {
+        flex-direction: column;
+        margin: 0px;
+
+      }
+
+      .buttons button {
+        padding: 20px;
+      }
+}
+
+.size-option-disabled {
+  color: #999; /* Use a gray color for the text */
+  text-decoration: underline; /* Apply a strikethrough style */
+}

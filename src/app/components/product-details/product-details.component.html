@@ -1,0 +1,53 @@
+<!-- product-details.component.html -->
+
+<div class="product-details-container">
+    <div class="images-container">
+        <div class="main-image">
+          <img [src]=" apiUrlGetImage +  selectedImage" alt="{{ product.name }}">
+        </div>
+    
+        <div class="other-images">
+          <img *ngFor="let image of product.images" [src]=" apiUrlGetImage +  image" alt="{{ product.title }}" (click)="selectImage(image)">
+        </div>
+      </div>
+    
+    <div class="details-container">
+      <h2>{{ product.name }}</h2>
+      <p class="price">{{ product.price }} TND</p>
+      
+      <div class="options">
+        <div class="size-section">
+            <label for="size">Size</label>
+            <select id="size" [(ngModel)]="selectedSize" required>
+                <option  value="unselected" disabled selected>Select Size</option>
+                <option *ngFor="let size of sizeNames" [value]="size" [disabled]="product.availableQuantity[size] === 0" [ngClass]="{ 'size-option-disabled':  product.availableQuantity[size] === 0 }" > <span [ngClass]="{ 'size-option-disabled':  product.availableQuantity[size] === 0 }"  > {{ size }} </span></option>
+            </select>
+        </div>
+        
+  
+        <div class="quantity-section">
+            <label for="quantity">Quantity</label>
+            <div class="quantity-control">
+                <button (click)="decreaseQuantity()" [disabled]="selectedQuantity <= 1">-</button>
+                <input type="number" id="quantity" [(ngModel)]="selectedQuantity" min="1">
+                <button (click)="increaseQuantity()">+</button>
+              </div>
+        </div>
+        
+      </div>
+  
+      <div class="buttons">
+        <button [disabled]="isOutOfStock" class="add-cart" (click)="addToCart()" >Add to Cart</button>
+        <button [disabled]="isOutOfStock" class="buy-now" (click)="buyNow()" >Buy Now</button>
+      </div>
+
+      <div class="row">
+        <div class="out-of-stock text-white fs-5 text-center rounded-pill bg-danger m-auto w-auto" *ngIf="isOutOfStock">Out Of Stock</div>
+      </div>
+
+
+      <p class="description">{{ product.description }}</p>
+
+    </div>
+  </div>
+  
