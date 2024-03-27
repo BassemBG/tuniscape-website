@@ -1,0 +1,118 @@
+
+
+.navbar {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3); /* Add box shadow for better visibility */
+  
+  }
+  
+  
+  .logo-container:hover {
+    cursor: pointer;
+    
+  }
+  
+  .logo {
+    max-width: 40px; 
+    height: auto;
+  }
+  
+  .menu-toggle {
+    font-size: 24px;
+    cursor: pointer;
+    display: none; /* Initially hide on larger screens */
+  }
+  
+  .menu {
+    flex-direction: row;
+    color: black;
+    padding: 10px;
+    text-align: center;
+  
+  }
+  
+  .menu a {
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    transition: 0.7s ease;
+  }
+  
+  .menu a:hover {
+    text-decoration: underline;
+  }
+  
+  .cart-icon img {
+    width: 30px;
+  }
+  
+  .cart-icon {
+    position: relative;
+  }
+  
+  /* Media query for responsive design */
+  @media only screen and (max-width: 768px) {
+    .logo {
+      text-align: center;
+    }
+  
+    .menu {
+      display: none; /* Initially hide the menu on small screens */
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 85%;
+      height: 100%;
+      background-color: white;
+      color: black;
+      padding: 10px;
+      text-align: center;
+      transition: left 1s ease; /* Slide transition effect */
+      box-shadow: 5px 0 5px rgba(0, 0, 0, 0.5); /* Add box shadow for better visibility */
+    
+    }
+  
+    .menu-overlay {
+      display: none; /* Initially hide the overlay */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+      z-index: 1; /* Place the overlay under the menu */
+    }
+  
+    .menu-toggle {
+      display: block;
+    }
+  
+    .menu.show-menu {
+      display: flex; /* Display the menu when the class is applied */
+      left: 0px;
+      transition: left 1s ease; /* Slide transition effect */
+  
+    }
+  
+    .menu-overlay.show-menu {
+      display: block; /* Display the overlay when the menu is shown */
+    }
+  
+  }
+  
+  .quantity-circle {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    border-radius: 50%;
+    font-size: 10px;
+    background-color: red;
+    color: white;
+    width: 15px;
+  }

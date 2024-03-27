@@ -1,0 +1,22 @@
+<section class="products-section">
+    <h1 class="text-center"> Products </h1>
+  
+    <div class="products-list">
+      <div *ngFor="let product of products" class="product-card" (click)="viewDetails(product)">
+        <img [src]="apiUrlGetImage + product.images[0]" alt="{{ product.name }}">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-price">{{ product.price }} DT</p>
+        <!--<div class="product-actions">
+          <button (click)="viewDetails(product)" class="view-details" >View Details</button>
+          <button (click)="addToCart()" class="add-cart">Add to Cart</button>
+        </div>-->
+        
+      </div>
+    </div>
+    
+  </section>
+  
+  
+  
+  
+  

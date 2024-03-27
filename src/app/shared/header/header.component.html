@@ -1,0 +1,41 @@
+<!-- app.component.html -->
+<div class="navbar">
+    <div class="menu-toggle" (click)="toggleMenu()">☰</div>
+  
+    <div class="logo-container" [routerLink]="['/']">
+      <img class="logo" src="../assets/logo.png" alt="Your Logo">
+    </div>
+      <div class="menu-overlay" [ngClass]="{'show-menu': isMenuOpen}" (click)="closeMenu()">
+      <div class="menu" [ngClass]="{'show-menu': isMenuOpen}">
+        <a [routerLink]="['/']" (click)="closeMenu()">Home</a>
+        <a (click)="closeMenu()">Merch Collabs</a>
+        <a (click)="closeMenu()">Products</a>
+        <!-- Add more menu items as needed -->
+      </div>
+    </div>
+  
+    <div class="cart-icon">
+      <a [routerLink]="['Cart']"><img src="../assets/cart.png" alt="Shopping Cart"></a>
+      <div *ngIf="true" class="quantity-circle text-center"> {{ cartProductsQuantityNotif }} </div>
+    </div>
+  
+  </div>
+  
+  
+  
+  
+    <!--
+      <header>
+      <nav>
+        <div class="logo">Your Logo</div>
+        <div class="menu-icon" (click)="toggleMenu()">&#9776;</div>
+        <ul class="nav-list" [class.active]="isMenuOpen">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li class="cart-icon"><a href="#"><img src="../../../assets/cart.png" alt="Shopping Cart"></a></li>
+        </ul>
+      </nav>
+    </header>
+    -->
