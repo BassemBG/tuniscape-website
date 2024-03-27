@@ -6,10 +6,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
-
   product: any;
   productToAdd: any;
   selectedImage: string = ''; // Variable to store the selected image
@@ -84,10 +83,10 @@ export class ProductDetailsComponent implements OnInit {
           icon: 'success',
           title: 'Added to Cart',
           text: 'Your product was succesfully added to cart !',
-          confirmButtonText: "Check my Cart"
-        }).then((result) => {          
+          confirmButtonText: 'Check my Cart',
+        }).then((result) => {
           if (result.isConfirmed) {
-            this.router.navigate(['Cart/view']);
+            this.router.navigate(['cart']);
           }
         });
       } else {
@@ -136,7 +135,6 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.setProductsToBuy([this.productToAdd]);
     console.log('buy now : ', this.productToAdd);
 
-    this.router.navigate(['Cart/Checkout']);
+    this.router.navigate(['checkout']);
   }
-
 }

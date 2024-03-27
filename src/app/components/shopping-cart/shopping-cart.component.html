@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div *ngIf="cartProducts.length == 0" class="col-md-12 cart">
+        <div class="empty-container">
+            <div class="row text-center empty">
+                <h1>Your shopping Cart is Empty</h1>
+            </div>
+            <div class="row empty">
+                    <h2 class="text-center text-muted"><a [routerLink]="['/']">&leftarrow;Back to shop</a></h2>
+            </div>
+        </div> 
+    </div>
+    <div class="row" *ngIf="cartProducts.length > 0">
+        <div  class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col-6"><h4><b>Shopping Cart</b></h4></div>
+                    <div class="col-6 align-self-center text-center text-muted"> {{getNumberItems()}} items</div>
+                </div>
+            </div>    
+            <div *ngFor="let product of cartProducts; let arrayIndex = index" class="row border-top border-bottom">
+                <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" [src]=" apiUrlGetImage + product.image"></div>
+                    <div class="col">
+                        <div class="row text-muted">{{product.type}}</div>
+                        <div class="row">{{product.name}} - {{product.size}} </div>
+                    </div>
+                    <div class="col">
+                        <a class="quantity-control" (click)="decreaseQuantity(arrayIndex, product.quantity)" [class.disabled-link]="product.quantity <= 1" >-</a><span class="border" >{{product.quantity}}</span><a (click)="increaseQuantity(arrayIndex)" class="quantity-control">+</a>
+                    </div>
+                    <div class="col"> {{product.totalPrice}} DT<span class="close" (click)="deleteProduct(product._id)" >&#10005;</span></div>
+                </div>
+            </div>
+            <div class="back-to-shop"><a [routerLink]="['/']">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div><h5><b>Summary</b></h5></div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">{{getNumberItems()}} ITEMS</div>
+                <div class="col text-right"> {{getTotalPrice()}} DT</div>
+            </div>
+            <form>
+                <p>SHIPPING</p>
+                <select><option class="text-muted">Standard-Delivery - 7.00 DT</option></select>
+            <!--    
+                <p>GIVE CODE</p>
+                <input id="code" placeholder="Enter your code">
+            -->
+            </form>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right"> {{ getTotalPrice() + 7 }} DT</div>
+            </div>
+            <button class="btn" (click)="checkout()" >CHECKOUT</button>
+        </div>
+    </div>
+    
+</div>
