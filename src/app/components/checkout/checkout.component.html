@@ -1,0 +1,116 @@
+<!-- checkout.component.html -->
+<div class="container col-md-8 text-center">
+    <div class="checkout-container row">
+        <div class="form-container col-md-8 col-sm-12">
+            <form [formGroup]="checkoutForm" (ngSubmit)="submitForm()"  >
+                <div class="form-group">
+                  <div class="name-group">
+                    <div class="form-subgroup">
+                      <label for="firstName">First Name:</label>
+                      <input type="text" id="firstName" name="firstName" formControlName="firstName" [ngClass]="{'invalid-input': checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || checkoutForm.get('firstName')?.dirty || isSubmitted) } ">
+                      <div class="text-danger" *ngIf="checkoutForm.get('firstName')?.hasError('required') && (checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || checkoutForm.get('firstName')?.dirty || isSubmitted)) " >
+                        First Name is required.
+                      </div>
+                    </div>
+                    <div class="form-subgroup">
+                      <label for="lastName">Last Name:</label>
+                      <input type="text" id="lastName" name="lastName" formControlName="lastName" [ngClass]="{'invalid-input': checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || checkoutForm.get('lastName')?.dirty || isSubmitted) } ">
+                      <div class="text-danger" *ngIf="checkoutForm.get('lastName')?.hasError('required') && (checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || checkoutForm.get('lastName')?.dirty || isSubmitted))">
+                        Last Name is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" formControlName="email" [ngClass]="{'invalid-input': checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || checkoutForm.get('email')?.dirty || isSubmitted) } ">
+                  <div class="text-danger" *ngIf="checkoutForm.get('email')?.hasError('required') && (checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || checkoutForm.get('email')?.dirty || isSubmitted))">
+                    Email is required.
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="address">Address:</label>
+                  <input type="text" id="address" name="address" formControlName="address" [ngClass]="{'invalid-input': checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || checkoutForm.get('address')?.dirty || isSubmitted) } ">
+                  <div class="text-danger" *ngIf="checkoutForm.get('address')?.hasError('required') && (checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || checkoutForm.get('address')?.dirty || isSubmitted))">
+                    Address is required.
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <div class="address-group">
+                    
+                    <div class="form-subgroup">
+                      <label for="postalCode">Postal Code:</label>
+                      <input type="text" id="postalCode" name="postalCode" formControlName="postalCode" [ngClass]="{'invalid-input': checkoutForm.get('postalCode')?.invalid && (checkoutForm.get('postalCode')?.touched || checkoutForm.get('postalCode')?.dirty || isSubmitted) } ">
+                      <div class="text-danger" *ngIf="checkoutForm.get('postalCode')?.hasError('required') && (checkoutForm.get('postalCode')?.invalid && (checkoutForm.get('postalCode')?.touched || checkoutForm.get('postalCode')?.dirty || isSubmitted))">
+                        Postal Code is required.
+                      </div>
+                    </div>
+                    <div class="form-subgroup">
+                      <label for="city">City:</label>
+                      <input type="text" id="city" name="city" formControlName="city" [ngClass]="{'invalid-input': checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || checkoutForm.get('city')?.dirty || isSubmitted) } ">
+                      <div class="text-danger" *ngIf="checkoutForm.get('city')?.hasError('required') && (checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || checkoutForm.get('city')?.dirty || isSubmitted) )">
+                        City is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <label for="phone">Phone:</label>
+                  <input type="tel" id="phone" name="phone" formControlName="phone" [ngClass]="{'invalid-input': checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || checkoutForm.get('phone')?.dirty || isSubmitted) } ">
+                  <div class="text-danger" *ngIf="checkoutForm.get('phone')?.hasError('required') && (checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || checkoutForm.get('phone')?.dirty) || isSubmitted)">
+                    Phone Number is required.
+                  </div>
+                  <div class="text-danger" *ngIf="checkoutForm.get('phone')?.hasError('invalidPhoneLength') && (checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || checkoutForm.get('phone')?.dirty) || isSubmitted)">
+                    Phone Number should be 8 numbers.
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                  <label for="shippingMethod">Shipping Method:</label>
+                  <select id="shippingMethod" name="shippingMethod" >
+                    <option value="delivery">Delivery (7 TND)</option>
+                  </select>
+                </div>
+            
+                <div class="form-group">
+                  <label for="paymentMethod">Payment Method:</label>
+                  <select id="paymentMethod" name="paymentMethod" >
+                    <option value="cashOnDelivery">Cash on Delivery</option>
+                  </select>
+                </div>
+            
+                <button type="submit">Place Order</button>
+              </form>
+        </div>
+        
+    
+        <div class="order-summary col-md-4 col-sm-12">
+            <h2>Order Summary</h2>
+            <div class="order-items" *ngFor="let item of addedProducts">
+              <div class="order-item">
+                <div class="img-container">
+                    <img [src]=" apiUrlGetImage +  item.image" alt="{{ item.name }}">
+                    <div class="quantity-circle">{{ item.quantity }}</div>
+                </div>
+                <div class="item-details">
+                  <h2>{{ item.name }}</h2>
+                  <h6 class="text-muted">{{ item.size }}</h6>
+                </div>
+                <div class="item-total">{{ item.totalPrice }} DT</div>
+              </div>
+            </div>
+      
+            <div class="order-summary-total">
+              <p>Total Price (without delivery): {{ totalWithoutDelivery }} DT</p>
+              <p>Delivery Fee: {{ deliveryFee }} DT</p>
+              <h3>Grand Total: {{ grandTotal }} DT</h3>
+            </div>
+          </div>
+    
+      </div>
+      
+</div>

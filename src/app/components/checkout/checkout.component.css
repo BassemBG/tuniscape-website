@@ -1,0 +1,120 @@
+/* checkout.component.css */
+* {
+    font-size: 1rem;
+}
+
+.checkout-container {
+    margin: auto;
+    padding: 20px;
+  }
+  
+  @media(min-width:1000px){
+    .form-container {
+        padding-right: 10%;
+      }
+}
+  
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  .name-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .address-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-subgroup {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+  }
+  
+  .order-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+  }
+  
+  .order-items {
+    margin-bottom: 15px;
+  }
+  
+  .order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  img, .img-container {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .img-container {  
+    position: relative;
+  }
+  
+  .item-details {
+    flex: 1;
+  }
+  
+  .item-total {
+    font-weight: bold;
+  }
+  
+  .order-summary-total {
+    margin-top: 10px;
+  }
+  
+  .order-summary h2 {
+    margin-bottom: 10px;
+  }
+  
+  .quantity-circle {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    border-radius: 50%;
+    font-size: 10px;
+    background-color: rgb(59, 58, 58);
+    color: white;
+    width: 15px;
+}
+
+.invalid-input {
+    border: 1px solid red;
+}

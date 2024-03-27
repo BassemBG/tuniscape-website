@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { FormsModule } from '@angular/forms';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     ProductsListComponent,
     ProductDetailsComponent,
     ShoppingCartComponent,
+    CheckoutComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [
