@@ -10,7 +10,7 @@ import { ProductsListComponent } from './components/products-list/products-list.
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 
@@ -25,7 +25,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     ShoppingCartComponent,
     CheckoutComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
     { provide: 'API_BASE_URL', useValue: environment.apiBaseUrl }, // Provide the backend URL
     { provide: 'API_URL_GET_IMAGE', useValue: environment.apiUrlGetImage }, // Provide the backend URL
