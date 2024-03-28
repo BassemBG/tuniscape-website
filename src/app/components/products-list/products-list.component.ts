@@ -28,7 +28,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   viewDetails(product: any) {
-    this.productService.setSelectedProduct(product);
-    this.router.navigate(['/product-details']);
+    //this.productService.setSelectedProduct(product);   this is deleted because id is passed in url
+    this.router.navigate(['/product-details', product._id]);
   }
 }

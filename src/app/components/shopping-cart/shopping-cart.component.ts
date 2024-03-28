@@ -85,7 +85,7 @@ export class ShoppingCartComponent implements OnInit {
 
   checkout() {
     this.productService.setProductsToBuy(this.cartProducts);
-    this.router.navigate(['Cart/Checkout']);
+    this.router.navigate(['checkout']);
   }
 
 }

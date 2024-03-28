@@ -14,7 +14,7 @@ export class ProductService {
     @Inject('API_BASE_URL') private apiBaseUrl: string
   ) {}
 
-  selectedProduct: any;
+  //selectedProduct: any;    this is deleted because id is passed in url
   cartProducts: any[] = [];
   productDirectlyBought: any;
   productsToBuy: any[] = [];
@@ -34,6 +34,10 @@ export class ProductService {
     return this.http.get(this.url + 'getall',/* { headers }*/);
   }
 
+  getProductById(id: any) {
+    return this.http.get(this.url + 'getbyid/' + id);
+  }
+
   deleteProduct(productId: String) {
     return this.http.delete(this.url + 'delete/' + productId);
   }
@@ -48,14 +52,16 @@ export class ProductService {
     return this.http.put(this.url + 'update/' + productId, newProductData);
   }
 
+  //this is deleted because id is passed in url
   //used to get data to details components (product details)
+  /*
   setSelectedProduct(product: any) {
     this.selectedProduct = product;
   }
 
   getSelectedProduct(): any {
     return this.selectedProduct;
-  }
+  }*/
 
 
   //used to get data to modify-product components (admin side)

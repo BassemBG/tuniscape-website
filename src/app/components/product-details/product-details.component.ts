@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
 
@@ -16,39 +16,58 @@ export class ProductDetailsComponent implements OnInit {
   selectedQuantity: number = 1; // Variable to store the selected quantity
   sizeNames: string[] = [];
   isOutOfStock: Boolean = false;
+  receivedId: any;
   constructor(
     private productService: ProductService,
     private router: Router,
+    private act: ActivatedRoute,
     @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string
   ) {}
 
   ngOnInit(): void {
-    this.product = this.productService.getSelectedProduct();
-    console.log(this.product);
-    this.sizeNames = Object.keys(this.product.availableQuantity).filter(
-      (size) => {
-        // Exclude the key "_id"
+    //get id from url
+    this.receivedId = this.act.snapshot.paramMap.get('id');
 
-        return size !== '_id';
+    //get product details
+    this.productService.getProductById(this.receivedId).subscribe(
+      (res) => {
+        console.log(res);
+
+        this.product = res;
+
+        //setting the ui stuff only when product is loaded: sizes, out of stock visibility, main image
+        this.sizeNames = Object.keys(this.product.availableQuantity).filter(
+          (size) => {
+            // Exclude the key "_id"
+
+            return size !== '_id';
+          }
+        );
+
+        //setting out of stock or not
+        let totalAvailableQuantity = 0;
+        for (const key in this.product.availableQuantity) {
+          if (key !== '_id') {
+            totalAvailableQuantity += this.product.availableQuantity[key];
+          }
+        }
+
+        // Check if total available quantity is greater than 0
+        if (totalAvailableQuantity > 0) {
+          this.isOutOfStock = false;
+        } else {
+          this.isOutOfStock = true;
+        }
+
+        this.selectedImage = this.product.images[0];
+      },
+
+      (err) => {
+        console.log(err);
       }
     );
 
-    //setting out of stock or not
-    let totalAvailableQuantity = 0;
-    for (const key in this.product.availableQuantity) {
-      if (key !== '_id') {
-        totalAvailableQuantity += this.product.availableQuantity[key];
-      }
-    }
-
-    // Check if total available quantity is greater than 0
-    if (totalAvailableQuantity > 0) {
-      this.isOutOfStock = false;
-    } else {
-      this.isOutOfStock = true;
-    }
-
-    this.selectedImage = this.product.images[0];
+    //this.product = this.productService.getSelectedProduct();
   }
 
   increaseQuantity() {
