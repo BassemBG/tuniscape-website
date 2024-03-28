@@ -146,9 +146,19 @@ export class ProductDetailsComponent implements OnInit {
         this.productToAdd['totalPrice'] =
           this.selectedQuantity * this.productToAdd['price'];
       } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Insufficient Quantity',
+          text: 'The specified quantity is unavailable !',
+        });
         return; //TO DO : if condition isn't satisfied throw error with frontend
       }
     } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'No size selected',
+        text: 'Please select your size before proceeding further !',
+      });
       return; //TO DO: if condition isn't satisfied throw error
     }
     this.productService.setProductsToBuy([this.productToAdd]);
