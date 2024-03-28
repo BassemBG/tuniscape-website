@@ -4,12 +4,13 @@ import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'tuniscape';
 
   isAdminRoute: boolean = false;
+  isLoginRoute: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -17,12 +18,13 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isAdminRoute = event.urlAfterRedirects.startsWith('/admin');
+        this.isLoginRoute = event.urlAfterRedirects.startsWith('/login');
         console.log(event);
-        
+
         console.log(this.isAdminRoute);
+        console.log(this.isLoginRoute);
         
       }
     });
   }
-
 }
