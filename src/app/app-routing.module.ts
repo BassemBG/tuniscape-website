@@ -12,6 +12,7 @@ import { AddProductComponent } from './admin/products/add-product/add-product.co
 import { ModifyProductComponent } from './admin/products/modify-product/modify-product.component';
 import { LoginComponent } from './admin/login/login.component';
 import { PassGuard } from './services/pass.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -59,6 +60,9 @@ const routes: Routes = [
     ],
   },
   { path: 'login', component: LoginComponent },
+
+  { path: '**', component: NotFoundComponent },
+
 ];
 
 @NgModule({

@@ -20,6 +20,7 @@ import { ProductsComponent } from './admin/products/products.component';
 import { AddProductComponent } from './admin/products/add-product/add-product.component';
 import { ModifyProductComponent } from './admin/products/modify-product/modify-product.component';
 import { LoginComponent } from './admin/login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LoginComponent } from './admin/login/login.component';
     AddProductComponent,
     ModifyProductComponent,
     LoginComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
