@@ -1,0 +1,41 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+.header {
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+.content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.product-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+.product-name {
+    font-weight: bold;
+}
+.total-price {
+    font-weight: bold;
+    font-size: 18px;
+}

@@ -1,0 +1,68 @@
+<div class="form-container">
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="text-center">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Name:</label>
+                <input type="text" formControlName="name" required>
+          
+            </div>
+            <div class="col-md-6">
+                <label>Type:</label>
+                <input type="text" formControlName="type" required>
+          
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12">
+                <label>Description:</label>
+                <input type="text" formControlName="description">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <label>Price:</label>
+                <input type="number" formControlName="price" class="w-50" required>          
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12">
+                <label>Quantity / Stock:</label>
+                <div formGroupName="availableQuantity">
+                    <div class="row">
+                        <div class="col-md-2 col-6">
+                            <label>XS</label>
+                            <input type="number" formControlName="XS" placeholder="XS" required>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <label>S</label>
+                            <input type="number" formControlName="S" placeholder="S" required>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <label>M</label>
+                            <input type="number" formControlName="M" placeholder="M" required>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <label>L</label>
+                            <input type="number" formControlName="L" placeholder="L" required>
+                        </div>
+                        <div class="col-md-3 col-12">
+                            <label>XL</label>
+                            <input type="number" formControlName="XL" placeholder="XL" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+      
+      <label>Images:</label>
+      <input type="file" (change)="onFileChange($event)" multiple accept="image/*">
+    
+      <button type="submit" [disabled]="productForm.invalid">Submit</button>
+    </form>
+    
+
+</div>

@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="header">
+        <h2>New Order Notification</h2>
+    </div>
+    <div class="content">
+        <p>A new order has been placed with the following details:</p>
+        <p>Order ID: {{ orderDetails._id }}</p>
+        <p>Order Date: {{ orderDetails.createdAt }}</p>
+        <p>Customer Name: {{ orderDetails.customerInfos.firstName }} {{ orderDetails.customerInfos.lastName }}</p>
+        <p>Customer Email: {{ orderDetails.customerInfos.email }}</p>
+        <p>Customer Phone Number: {{ orderDetails.customerInfos.phone }}</p>
+        <p>Customer Address: {{ orderDetails.customerInfos.address }}, {{ orderDetails.customerInfos.city }}, {{ orderDetails.customerInfos.postalCode }}</p>
+        <h3>Products:</h3>
+        <ul class="product-list">
+            <ng-container *ngFor="let product of orderDetails.products">
+                <li class="product-item">
+                    <span>{{ product.name }} - {{ product.size }}</span><br>
+                    <span>{{ product.quantity }} x {{ product.price }} DT = {{ product.totalPrice }} DT</span><br>
+                </li>
+            </ng-container>
+        </ul>
+        <p>Order Value: {{ calculateTotalPrice(orderDetails) }} DT </p>
+    </div>
+    <div class="footer">
+        <p>Best regards,</p>
+        <p>Tuniscape Team</p>
+    </div>
+</div>

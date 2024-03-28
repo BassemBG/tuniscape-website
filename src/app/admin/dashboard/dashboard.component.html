@@ -1,0 +1,16 @@
+<div class="container-fluid ">
+    <div class="row">
+        <nav class="sidebar col-sm-3 col-md-2">
+            <ul class="nav-links">
+              <li><a [routerLink]="['orders']">Orders</a></li>
+              <li><a [routerLink]="['products']">Products</a></li>
+              <li><a href="#">Disconnect</a></li>
+            </ul>
+          </nav>
+          <div class="col-sm-9 col-md-10 pt-5 ">
+            <router-outlet class="overflow-auto"></router-outlet>
+          </div>
+    </div>
+</div>
+
+  

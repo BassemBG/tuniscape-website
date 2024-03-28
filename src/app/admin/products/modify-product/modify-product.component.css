@@ -1,0 +1,49 @@
+
+
+.form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  .name-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .address-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-subgroup {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+  }

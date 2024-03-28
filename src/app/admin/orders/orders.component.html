@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col">
+        <h1 class="title">Orders</h1>
+    </div>
+    
+</div>
+<div class="row p-3">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Customer name</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Order</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Operation</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let order of orders; let i = index">
+          <tr>
+            <th scope="row">{{i}}</th>
+            <td>{{ order.customerInfos.firstName }} {{ order.customerInfos.lastName }}</td>
+            <td>{{ order.customerInfos.postalCode}} {{ order.customerInfos.city }} {{ order.customerInfos.address }}</td>
+            <td> {{ order.customerInfos.phone }} </td>
+            <td> {{ order.customerInfos.email }} </td>
+            <td style="white-space: pre-wrap;">
+                <ng-container *ngFor="let product of order.products"  class="text-lead" >
+                    <span> <b>  {{ product.name }} - {{product.size}} </b> </span>
+                    <br>
+                    <span> Quantity : {{ product.quantity }} * {{ product.price }} DT </span>
+                    <br>
+                </ng-container>
+                
+                
+            </td>
+            <td> {{ calculateTotal(order.products) }} </td>
+            <td class="fw-bold"> <button (click)="checkOrderDetails(order)" class="btn btn-primary" >Check details</button> </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+

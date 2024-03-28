@@ -13,6 +13,12 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { OrderDetailsComponent } from './admin/orders/order-details/order-details.component';
+import { ProductsComponent } from './admin/products/products.component';
+import { AddProductComponent } from './admin/products/add-product/add-product.component';
+import { ModifyProductComponent } from './admin/products/modify-product/modify-product.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +30,12 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     ProductDetailsComponent,
     ShoppingCartComponent,
     CheckoutComponent,
+    DashboardComponent,
+    OrdersComponent,
+    OrderDetailsComponent,
+    ProductsComponent,
+    AddProductComponent,
+    ModifyProductComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [

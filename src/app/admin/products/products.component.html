@@ -1,0 +1,46 @@
+<div class="content pt-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="title">Products</h1>
+        </div>
+        <div class="col text-end">
+            <button (click)="goToAddPage()" class="btn btn-success w-auto">+ Add product</button>
+        </div>
+    </div>
+    <div class="row p-3">
+        <table class="table text-center">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">type</th>
+                <th scope="col">Inventory</th>
+                <th scope="col">Operation</th>
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let product of products; let i = index">
+              <tr>
+                <th scope="row">{{i}}</th>
+                <td>{{ product.name }}</td>
+                <td>{{ product.type }}</td>
+                <td style="white-space: pre-wrap;">
+                    <ng-container *ngFor="let size of product.availableQuantity | keyvalue"  class="text-lead" >
+                        <span *ngIf="size.key != '_id'">
+                            {{ size.key }} : {{ size.value }} 
+                       </span>
+                       <br>
+                    </ng-container>
+                    
+                    
+                </td>
+                <td>
+                    <button (click)="deleteProduct(product._id)" class="btn btn-danger fw-bold">Delete</button>    
+                    <button (click)="goToModifyPage(product)" class="btn btn-info fw-bold">Modify</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    
+  </div>
