@@ -89,7 +89,7 @@ export class ModifyProductComponent implements OnInit {
     console.log(formData);
 
     this.isSubmitted = true;
-
+    
     this.productService
       .updateProduct(this.productDetails._id, formData)
       .subscribe(

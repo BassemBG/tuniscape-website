@@ -16,7 +16,7 @@
       <p class="price">{{ product.price }} TND</p>
       
       <div class="options">
-        <div class="size-section">
+        <div class="size-section" *ngIf="product.type != 'accessories'" >
             <label for="size">Size</label>
             <select id="size" [(ngModel)]="selectedSize" required>
                 <option  value="unselected" disabled selected>Select Size</option>

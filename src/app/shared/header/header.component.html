@@ -1,21 +1,21 @@
 <!-- app.component.html -->
-<div class="navbar">
-    <div class="menu-toggle" (click)="toggleMenu()">☰</div>
+<div class="navbar w-100" [ngClass]="{ 'scrolled':  isScrolled, 'navbar-transparent':  isHomeComponent}" >
+    <div class="menu-toggle" (click)="toggleMenu()" [ngClass]="{'text-black': isScrolled || !isHomeComponent}" >☰</div>
   
-    <div class="logo-container" [routerLink]="['/']">
-      <img class="logo" src="../assets/logo.png" alt="Your Logo">
+    <div class="logo-container" (click)="selectProductType('clothing')">
+      <img class="logo" [src]="isScrolled || !isHomeComponent ? '../assets/logo-st-black.png' : '../assets/logo-st-white.png' " alt="Your Logo">
     </div>
       <div class="menu-overlay" [ngClass]="{'show-menu': isMenuOpen}" (click)="closeMenu()">
-      <div class="menu" [ngClass]="{'show-menu': isMenuOpen}">
-        <a [routerLink]="['/']" (click)="closeMenu()">Home</a>
-        <a (click)="closeMenu()">Merch Collabs</a>
-        <a (click)="closeMenu()">Products</a>
+      <div class="menu" [ngClass]="{'show-menu': isMenuOpen, 'text-black': isScrolled}">
+        <a (click)="selectProductType('clothing')" class="fw-bold" [ngClass]="{'text-black': isScrolled ||  !isHomeComponent}">Home</a>
+        <a (click)="selectProductType('merch')" class="fw-bold" [ngClass]="{'text-black': isScrolled || !isHomeComponent}">Merch Collabs</a>
+        <a (click)="selectProductType('accessories')" class="fw-bold" [ngClass]="{'text-black': isScrolled || !isHomeComponent}">Accessories</a>
         <!-- Add more menu items as needed -->
       </div>
     </div>
   
-    <div class="cart-icon">
-      <a [routerLink]="['cart']"><img src="../assets/cart.png" alt="Shopping Cart"></a>
+    <div class="cart-icon me-md-3">
+      <a [routerLink]="['cart']"><img [src]="isScrolled || !isHomeComponent ? '../assets/cart-black.png' : '../assets/cart-white.png'" alt="Shopping Cart"></a>
       <div *ngIf="true" class="quantity-circle text-center"> {{ cartProductsQuantityNotif }} </div>
     </div>
   

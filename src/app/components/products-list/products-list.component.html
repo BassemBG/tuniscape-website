@@ -1,17 +1,21 @@
-<section class="products-section">
-    <h1 class="text-center"> Products </h1>
-  
-    <div class="products-list">
-      <div *ngFor="let product of products" class="product-card" (click)="viewDetails(product)">
-        <img [src]="apiUrlGetImage + product.images[0]" alt="{{ product.name }}">
-        <h2 class="product-name">{{ product.name }}</h2>
-        <p class="product-price">{{ product.price }} DT</p>
-        <!--<div class="product-actions">
-          <button (click)="viewDetails(product)" class="view-details" >View Details</button>
-          <button (click)="addToCart()" class="add-cart">Add to Cart</button>
-        </div>-->
+<section class="products-section container ">
+  <div class="row">
+    <h1 class="text-center"> {{ title }} </h1>
+  </div>
+
+    <div class="row py-3 px-3 px-md-5 text-center">
+      <div *ngFor="let product of products" class="product-card col-md-3 p-md-5 col-6 text-center h-100" (click)="viewDetails(product)">
         
-      </div>
+          <img [src]="apiUrlGetImage + product.images[0]" alt="{{ product.name }}">
+          <h5 class="product-price">{{ product.price }} DT</h5>
+          <h2 class="product-name">{{ product.name }}</h2>
+
+          <!--<div class="product-actions">
+            <button (click)="viewDetails(product)" class="view-details" >View Details</button>
+            <button (click)="addToCart()" class="add-cart">Add to Cart</button>
+          </div>-->
+        </div>    
+              
     </div>
     
   </section>

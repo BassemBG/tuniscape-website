@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -26,12 +26,47 @@ export class ProductService {
 
   private cartQuantityNotifSubject = new BehaviorSubject<number>(0);
   cartQuantityNotif$ = this.cartQuantityNotifSubject.asObservable();
+  private selectedCategorySubject = new BehaviorSubject<string>('clothing'); // this is useful to change products-list content on navbar click
+
+  //this is used as cache, we will save products here and only query db once
+  private productCache: any = {};
+
+
+  getSelectedProductType(): Observable<string> {
+    return this.selectedCategorySubject.asObservable();
+  }
+
+  setSelectedProductType(type: string): void {
+    this.selectedCategorySubject.next(type);
+  }
 
   //make api call to get all products from DB
   getAllProducts() {
     //const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
+    if (this.productCache['allProducts']) {
+      return of(this.productCache['allProducts']);
+    } else {
 
-    return this.http.get(this.url + 'getall',/* { headers }*/);
+    return this.http.get(this.url + 'getall',/* { headers }*/).pipe(
+      tap(products => {
+        this.productCache['allProducts'] = products;
+      })
+    );
+    }
+  }
+
+  getProductsByType(type: string): Observable<any[]> {
+    if (this.productCache[type]) {
+      return of(this.productCache[type]);
+    } else {
+
+      return this.http.get<any[]>(`${this.url}getall?type=${type}`).pipe(
+        tap(products => {
+          this.productCache[type] = products;
+        })
+      );
+    
+    }
   }
 
   getProductById(id: any) {

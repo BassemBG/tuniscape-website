@@ -70,43 +70,45 @@ export class CheckoutComponent implements OnInit {
 
   submitForm() {
     // Handle form submission logic
-    if (this.checkoutForm.valid) {
-      console.log('Form submitted');
-    }
-    this.order['customerInfos'] = this.checkoutForm.value;
-    this.order['products'] = this.addedProducts;
-    console.log(this.order);
-
     this.isSubmitted = true;
 
-    this.orderService.addOrder(this.order).subscribe(
-      (res) => {
-        console.log('Order placed successfully:', res);
-        this.productService.resetCartProducts();
-        this.productService.resetProductsToBuy();
-        Swal.fire({
-          icon: 'success',
-          title: 'Order Confirmation',
-          text: 'Your Order has been placed ! You will receive a confirmation email shortly !',
-        }).then((result) => {          
-          if (result.isConfirmed) {
-            this.router.navigate(['/']);
-          }
-        });
-      },
-      (err) => {
-        console.log('Error placing order:', err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Order Failure',
-          text: err.error.error,
-        }).then((result) => {          
-          if (result.isConfirmed) {
-            this.router.navigate(['/']);
-          }
-        });
-      }
-    );
+    if (this.checkoutForm.valid) {
+      console.log('Form submitted');
+      this.order['customerInfos'] = this.checkoutForm.value;
+      this.order['products'] = this.addedProducts;
+      console.log(this.order);
+  
+  
+      this.orderService.addOrder(this.order).subscribe(
+        (res) => {
+          console.log('Order placed successfully:', res);
+          this.productService.resetCartProducts();
+          this.productService.resetProductsToBuy();
+          Swal.fire({
+            icon: 'success',
+            title: 'Order Confirmation',
+            text: 'Your Order has been placed ! You will receive a confirmation email shortly !',
+          }).then((result) => {          
+            if (result.isConfirmed) {
+              this.router.navigate(['/']);
+            }
+          });
+        },
+        (err) => {
+          console.log('Error placing order:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Order Failure',
+            text: err.error.error,
+          }).then((result) => {          
+            if (result.isConfirmed) {
+              this.router.navigate(['/']);
+            }
+          });
+        }
+      );
+  
+    }
   }
 
 

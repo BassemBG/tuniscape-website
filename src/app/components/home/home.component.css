@@ -1,37 +1,42 @@
 .banner {
-    height: calc(100vh - 100px);
+    height: 75vh;
     display: flex;
     align-items: center;
     color: black;
     overflow: hidden;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); /* Add box shadow for better visibility */
+    background-image: url('../../../assets/banner-closer.jpeg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 0px;
 
   }
   
   .text-container {
     padding: 20px;
     min-width: 50%;
+    width: 100%;
+    text-align: center;
+
   }
   
   .text-container h1 {
-    font-size: 9em;
+    font-size: 6em;
     margin-bottom: 15px;
     font-family: arno;
     font-weight: lighter;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
+
   }
   
   .text-container p {
     font-size: 1.5em;
     line-height: 1.5;
-  }
-
-  .banner .img-container {
-    width: 50%;
-    margin-left: auto;
-    display: flex;
-    align-items: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
 
   }
+
 
   .img-container .home-img {
     height: auto;
@@ -44,34 +49,17 @@
     .banner {
         padding-top: 2.5em;
         align-items: flex-start;
+        height: 60vh;
+
       }
 
     .text-container h1 {
-        font-size: 5em;
+        font-size: 2.7em;
       }
       
       .text-container p {
-        font-size: 1.5em;
+        font-size: 0.8em;
+        font-weight: bolder;
       }
 
-      .text-container {
-        width: 100%;
-        text-align: center;
-      }
-
-      .banner {
-        background-image: url('../../../assets/3-sweats-bg.jpeg'); /* Replace with your image path */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-bottom: 0px;
-      }
-
-      .banner .img-container {
-        width: 0%;
-      }
-
-      .home-img {
-        display: none;
-      }
   }

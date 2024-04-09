@@ -113,7 +113,6 @@
   .buttons button:hover {
     transform: scale(1.05);
     animation: ease-in;
-    cursor: pointer;
 
   }
   
@@ -133,17 +132,17 @@
   button[disabled]:hover {
     background-color: white;  
     color: black;
-    transform: scale(1);
+    transform: scale(0);
 }
 
   .add-cart {
-    background-color: white;
-    border: 3px solid black;
+    background-color: #f0ede7;
+    border: 3px solid rgb(1, 59, 1);
     color: black;
   }
 
   .buy-now {
-    background-color: black;
+    background-color: rgb(1, 59, 1);
     color: white;
   }
 

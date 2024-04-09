@@ -6,13 +6,11 @@
 .products-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 20px;
   }
   
   .product-card {
-    width: 300px;
-    margin: 15px;
     text-align: center;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
@@ -30,8 +28,9 @@
   }
   
   .product-card img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    object-fit: cover;
   }
   
   .product-actions {

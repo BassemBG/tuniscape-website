@@ -1,16 +1,23 @@
-
-
 .navbar {
-    background-color: white;
-    color: black;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3); /* Add box shadow for better visibility */
-  
+    color: black;
   }
   
+  .navbar-transparent {
+    color: white;
+    position: fixed;
+    z-index: 999;
+    transition: background-color 0.3s ease;
+
+  }
+
+  .scrolled {
+    background-color: #F0EDE7;
+    
+  }
   
   .logo-container:hover {
     cursor: pointer;
@@ -18,7 +25,7 @@
   }
   
   .logo {
-    max-width: 40px; 
+    max-width: 50px; 
     height: auto;
   }
   
@@ -33,14 +40,15 @@
     color: black;
     padding: 10px;
     text-align: center;
-  
   }
   
   .menu a {
-    color: black;
+    color: white;
     text-decoration: none;
     padding: 10px;
     transition: 0.7s ease;
+    cursor: pointer;
+    
   }
   
   .menu a:hover {
@@ -67,15 +75,19 @@
       position: fixed;
       top: 0;
       left: -250px;
-      width: 85%;
+      width: 55%;
       height: 100%;
-      background-color: white;
+      background-color: #F0EDE7;
       color: black;
       padding: 10px;
       text-align: center;
       transition: left 1s ease; /* Slide transition effect */
       box-shadow: 5px 0 5px rgba(0, 0, 0, 0.5); /* Add box shadow for better visibility */
     
+    }
+
+    .menu a {
+      color: black;
     }
   
     .menu-overlay {
@@ -97,7 +109,6 @@
       display: flex; /* Display the menu when the class is applied */
       left: 0px;
       transition: left 1s ease; /* Slide transition effect */
-  
     }
   
     .menu-overlay.show-menu {
