@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -11,10 +12,11 @@ export class ProductsListComponent implements OnInit {
   constructor(
     private router: Router,
     private productService: ProductService,
-    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string
-  ) {}
+    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string,
+    private titleService: Title //used to update pages window titles
+    ) {}
   products: any;
-  title: String = '';
+  title: string = '';
   ngOnInit(): void {
 
     //keep listening if navbar click happens to re-render
@@ -25,7 +27,7 @@ export class ProductsListComponent implements OnInit {
             this.title = "Tuniscape Products";
             break;
           case "merch":
-            this.title = "Tuniscape Collabs";
+            this.title = "Tuniscape Merch Collabs";
             break;
           case "accessories":
             this.title = "Tuniscape Accessories";
@@ -34,6 +36,7 @@ export class ProductsListComponent implements OnInit {
           default:
             break;
         }
+        this.titleService.setTitle(this.title);
         this.productService.getProductsByType(type).subscribe(
           (products) => {
             this.products = products;

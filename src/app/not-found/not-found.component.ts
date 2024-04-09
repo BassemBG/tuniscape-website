@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-not-found',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(    private titleService: Title //used to update pages window titles
+) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Tuniscape Prod - PAGE NOT FOUND");
   }
 
 }

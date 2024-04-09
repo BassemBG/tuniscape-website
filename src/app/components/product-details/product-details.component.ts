@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
@@ -21,7 +22,9 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private act: ActivatedRoute,
-    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string
+    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string,
+    private titleService: Title //used to update pages window titles
+
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +37,7 @@ export class ProductDetailsComponent implements OnInit {
         console.log(res);
 
         this.product = res;
+        this.titleService.setTitle(this.product.name);
 
         //setting the ui stuff only when product is loaded: sizes, out of stock visibility, main image
         this.sizeNames = Object.keys(this.product.availableQuantity).filter(

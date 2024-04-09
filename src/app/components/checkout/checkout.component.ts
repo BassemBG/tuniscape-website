@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -19,13 +20,15 @@ export class CheckoutComponent implements OnInit {
   deliveryFee : number = 7; // Fixed delivery fee
   totalWithoutDelivery : number = 0;
   grandTotal : number = 0;
-
+  pageTitle: string = "Tuniscape Prod - Checkout";
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
     private orderService: OrderService,
     private router: Router,
-    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string
+    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string,
+    private titleService: Title //used to update pages window titles
+
   ) {
     this.checkoutForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -45,6 +48,7 @@ export class CheckoutComponent implements OnInit {
     this.addedProducts = this.productService.getProductsToBuy();
     console.log(this.addedProducts);
     this.calculateTotal();
+    this.titleService.setTitle(this.pageTitle);
   }
 
   // Calculate totals (without delivery then grand total)

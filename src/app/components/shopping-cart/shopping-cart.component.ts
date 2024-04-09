@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
@@ -13,11 +14,14 @@ export class ShoppingCartComponent implements OnInit {
   constructor(
     private router: Router,
     private productService: ProductService,
-    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string
+    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string,
+    private titleService: Title //used to update pages window titles
+
   ) {}
   cartProducts: any[] = [];
-
+  pageTitle: string = "Tuniscape Prod - Cart";
   ngOnInit(): void {
+    this.titleService.setTitle(this.pageTitle);
     this.cartProducts = this.productService.getAllCartProducts();
   }
 
