@@ -12,11 +12,11 @@
       </div>
     
     <div class="details-container">
-      <h2>{{ product.name }}</h2>
+      <h1>{{ product.name }}</h1>
       <p class="price">{{ product.price }} TND</p>
       
       <div class="options">
-        <div class="size-section" *ngIf="product.type != 'accessories'" >
+        <div class="size-section " *ngIf="product.type != 'accessories'" >
             <label for="size">Size</label>
             <select id="size" [(ngModel)]="selectedSize" required>
                 <option  value="unselected" disabled selected>Select Size</option>
@@ -29,7 +29,7 @@
             <label for="quantity">Quantity</label>
             <div class="quantity-control">
                 <button (click)="decreaseQuantity()" [disabled]="selectedQuantity <= 1">-</button>
-                <input type="number" id="quantity" [(ngModel)]="selectedQuantity" min="1">
+                <input type="number" id="quantity" [(ngModel)]="selectedQuantity" min="1" class="text-center">
                 <button (click)="increaseQuantity()">+</button>
               </div>
         </div>

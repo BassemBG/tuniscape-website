@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductType } from 'src/app/shared/enums/productType.enum';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,6 +14,7 @@ export class AddProductComponent implements OnInit {
   productForm: FormGroup;
   isSubmitted: boolean = false;
   images: File[] = []; // Store uploaded images
+  productTypes = Object.values(ProductType); // this is used for menu of types 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,16 +23,17 @@ export class AddProductComponent implements OnInit {
   ) {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.required],
-      type: ['', Validators.required],
+      type: [ProductType.TUNISCAPE_PRODUCTS, Validators.required],
       description: [''],
       price: ['', Validators.required],
       availableQuantity: this.formBuilder.group({
-        XS: ['', Validators.required],
-        S: ['', Validators.required],
-        M: ['', Validators.required],
-        L: ['', Validators.required],
-        XL: ['', Validators.required],
+        XS: [0, Validators.required],
+        S: [0, Validators.required],
+        M: [0, Validators.required],
+        L: [0, Validators.required],
+        XL: [0, Validators.required],
       }),
+      totalQuantity: [0, Validators.required],
       images: [[]], // required?
     });
   }
@@ -51,6 +54,7 @@ export class AddProductComponent implements OnInit {
 
   submitForm() {
     // Handle form submission logic
+    const productType : string = this.productForm.value.type;
 
     const formData = new FormData();
     formData.append('name', this.productForm.value.name);
@@ -61,6 +65,24 @@ export class AddProductComponent implements OnInit {
       'availableQuantity',
       JSON.stringify(this.productForm.value.availableQuantity)
     );
+
+    //add totalQuantity from ui if accessories, else calculate given sizes quantities 
+    if (productType == ProductType.ACCESSORIES) {
+      formData.append('totalQuantity', this.productForm.value.totalQuantity);
+
+    }else {
+      let availableQuantityValue = this.productForm.value.availableQuantity;
+      let sum: number = 0;
+      Object.keys(availableQuantityValue).forEach(size => {
+        // Retrieve the quantity for each size and add it to the sum
+        sum += availableQuantityValue[size];
+      });
+
+      formData.append('totalQuantity', sum.toString());
+
+      
+    }
+
     // Append each image file
     for (let i = 0; i < this.images.length; i++) {
       formData.append('images', this.images[i]);

@@ -50,12 +50,12 @@
 
   }
   
-  .details-container h2 {
+  .details-container h1 {
     font-size: 3em;
   }
 
   .price {
-    font-size: 1em;
+    font-size: 1.5em;
     margin-bottom: 10px;
   }
   

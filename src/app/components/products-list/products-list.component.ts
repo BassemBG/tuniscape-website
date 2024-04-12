@@ -17,6 +17,7 @@ export class ProductsListComponent implements OnInit {
     ) {}
   products: any;
   title: string = '';
+  isEmpty: Boolean = false;
   ngOnInit(): void {
 
     //keep listening if navbar click happens to re-render
@@ -39,7 +40,11 @@ export class ProductsListComponent implements OnInit {
         this.titleService.setTitle(this.title);
         this.productService.getProductsByType(type).subscribe(
           (products) => {
+            this.isEmpty = false;
             this.products = products;
+            if (products.length == 0) {
+              this.isEmpty = true;
+            }
           },
           (err) => {
             console.log(err);

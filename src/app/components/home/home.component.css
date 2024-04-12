@@ -5,12 +5,11 @@
     color: black;
     overflow: hidden;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); /* Add box shadow for better visibility */
-    background-image: url('../../../assets/banner-closer.jpeg'); /* Replace with your image path */
+    background-image: url('../../../assets/BANNER-WEB-SITE-FINNAL-1.png'); /* Replace with your image path */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border-bottom: 0px;
-
   }
   
   .text-container {
@@ -50,6 +49,8 @@
         padding-top: 2.5em;
         align-items: flex-start;
         height: 60vh;
+        background-image: url('../../../assets/banner-web-site-finnal-telephone-1.png'); /* Replace with your image path */
+        background-position: bottom;
 
       }
 

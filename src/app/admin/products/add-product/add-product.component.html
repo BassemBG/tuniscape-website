@@ -8,15 +8,19 @@
             </div>
             <div class="col-md-6">
                 <label>Type:</label>
-                <input type="text" formControlName="type" required>
-          
+                <select id="type" formControlName="type" required>
+                    <option *ngFor="let type of productTypes" [value]="type">{{ type }}</option>
+                </select>
+                
             </div>
         </div>
     
         <div class="row">
             <div class="col-12">
                 <label>Description:</label>
-                <input type="text" formControlName="description">
+                <textarea cols="120" rows="10" formControlName="description">
+                </textarea>
+
             </div>
         </div>
         
@@ -30,7 +34,7 @@
         <div class="row">
             <div class="col-12">
                 <label>Quantity / Stock:</label>
-                <div formGroupName="availableQuantity">
+                <div formGroupName="availableQuantity" *ngIf="productForm.get('type')?.value !== 'accessories'; else showAccessoriesQuantity">
                     <div class="row">
                         <div class="col-md-2 col-6">
                             <label>XS</label>
@@ -54,6 +58,14 @@
                         </div>
                     </div>
                 </div>
+                <ng-template #showAccessoriesQuantity>
+                    <div class="row">
+                        <div class="col text-center">
+                            <label>Quantity</label>
+                            <input type="number" formControlName="totalQuantity" placeholder="Quantity" required>
+                        </div>
+                    </div>
+                </ng-template>
             </div>
         </div>
     

@@ -3,8 +3,12 @@
     <h1 class="text-center"> {{ title }} </h1>
   </div>
 
-    <div class="row py-3 px-3 px-md-5 text-center">
-      <div *ngFor="let product of products" class="product-card col-md-3 p-md-5 col-6 text-center h-100" (click)="viewDetails(product)">
+    <div class="row py-3 px-3 py-md-1 px-md-5 text-center">
+      <div *ngIf="isEmpty">
+        <p>There are no {{ title }} for the moment, come back later ! </p>
+      </div>
+      <ng-container *ngIf="!isEmpty">
+        <div *ngFor="let product of products" class="product-card col-md-3 p-2 p-md-5 col-6 text-center h-100" (click)="viewDetails(product)">
         
           <img [src]="apiUrlGetImage + product.images[0]" alt="{{ product.name }}">
           <h5 class="product-price">{{ product.price }} DT</h5>
@@ -14,7 +18,9 @@
             <button (click)="viewDetails(product)" class="view-details" >View Details</button>
             <button (click)="addToCart()" class="add-cart">Add to Cart</button>
           </div>-->
-        </div>    
+        </div>
+      </ng-container>
+      
               
     </div>
     

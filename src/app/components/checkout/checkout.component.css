@@ -49,7 +49,7 @@
   }
   
   button {
-    background-color: black;
+    background-color: rgb(1, 59, 1);
     color: white;
     padding: 10px 15px;
     border: none;
@@ -110,7 +110,7 @@
     right: -5px;
     border-radius: 50%;
     font-size: 10px;
-    background-color: rgb(59, 58, 58);
+    background-color: #f0ede7;
     color: white;
     width: 15px;
 }

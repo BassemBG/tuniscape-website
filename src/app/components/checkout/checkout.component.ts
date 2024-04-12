@@ -30,6 +30,7 @@ export class CheckoutComponent implements OnInit {
     private titleService: Title //used to update pages window titles
 
   ) {
+    
     this.checkoutForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -92,6 +93,7 @@ export class CheckoutComponent implements OnInit {
             icon: 'success',
             title: 'Order Confirmation',
             text: 'Your Order has been placed ! You will receive a confirmation email shortly !',
+            confirmButtonColor: 'darkgreen'
           }).then((result) => {          
             if (result.isConfirmed) {
               this.router.navigate(['/']);
@@ -104,6 +106,7 @@ export class CheckoutComponent implements OnInit {
             icon: 'error',
             title: 'Order Failure',
             text: err.error.error,
+            confirmButtonColor: 'darkgreen'
           }).then((result) => {          
             if (result.isConfirmed) {
               this.router.navigate(['/']);

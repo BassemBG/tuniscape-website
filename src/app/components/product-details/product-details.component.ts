@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductType } from 'src/app/shared/enums/productType.enum';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -49,12 +50,7 @@ export class ProductDetailsComponent implements OnInit {
         );
 
         //setting out of stock or not
-        let totalAvailableQuantity = 0;
-        for (const key in this.product.availableQuantity) {
-          if (key !== '_id') {
-            totalAvailableQuantity += this.product.availableQuantity[key];
-          }
-        }
+        let totalAvailableQuantity = this.product.totalQuantity;
 
         // Check if total available quantity is greater than 0
         if (totalAvailableQuantity > 0) {
@@ -88,83 +84,139 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart() {
-    // TO DO: add product to cartProducts available in products service
+
+    //get type to treat each differently, accessories don't have sizes
+    const productType : ProductType = this.product.type; 
+
     const { _id, name, type, price, images } = this.product;
     const image = images[0];
     this.productToAdd = { _id, name, type, price, image };
 
-    if (this.selectedSize != 'unselected') {
-      if (
-        this.product['availableQuantity'][this.selectedSize] >=
-        this.selectedQuantity
-      ) {
-        this.productToAdd['size'] = this.selectedSize;
+    if (productType === ProductType.ACCESSORIES) {
+      if (this.product.totalQuantity >= this.selectedQuantity) {
+        this.productToAdd['size'] = '-';
         this.productToAdd['quantity'] = this.selectedQuantity;
-        this.productToAdd['totalPrice'] =
-          this.selectedQuantity * this.productToAdd['price'];
+        this.productToAdd['totalPrice'] = this.selectedQuantity * this.productToAdd['price'];
         Swal.fire({
           icon: 'success',
           title: 'Added to Cart',
           text: 'Your product was succesfully added to cart !',
           confirmButtonText: 'Check my Cart',
+          confirmButtonColor: 'darkgreen'
         }).then((result) => {
           if (result.isConfirmed) {
             this.router.navigate(['cart']);
           }
         });
-      } else {
+      }else {
         Swal.fire({
           icon: 'error',
           title: 'Insufficient Quantity',
           text: 'The specified quantity is unavailable !',
+          confirmButtonColor: 'darkgreen'
         });
         return; //TO DO : if condition isn't satisfied throw error with frontend
+
       }
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'No size selected',
-        text: 'Please select your size before proceeding further !',
-      });
-      return; //TO DO: if condition isn't satisfied throw error
+    }else {
+      if (this.selectedSize != 'unselected') {
+        if (
+          this.product['availableQuantity'][this.selectedSize] >=
+          this.selectedQuantity
+        ) {
+          this.productToAdd['size'] = this.selectedSize;
+          this.productToAdd['quantity'] = this.selectedQuantity;
+          this.productToAdd['totalPrice'] =
+            this.selectedQuantity * this.productToAdd['price'];
+          Swal.fire({
+            icon: 'success',
+            title: 'Added to Cart',
+            text: 'Your product was succesfully added to cart !',
+            confirmButtonText: 'Check my Cart',
+            confirmButtonColor: 'darkgreen'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['cart']);
+            }
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Insufficient Quantity',
+            text: 'The specified quantity is unavailable !',
+            confirmButtonColor: 'darkgreen'
+          });
+          return; //TO DO : if condition isn't satisfied throw error with frontend
+        }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'No size selected',
+          text: 'Please select your size before proceeding further !',
+          confirmButtonColor: 'darkgreen'
+        });
+        return; //TO DO: if condition isn't satisfied throw error
+      }
     }
+    
     this.productService.addCartProduct(this.productToAdd);
 
     console.log('Added to cart:', this.productToAdd);
   }
 
   buyNow(): void {
-    // TO DO: i need to implement the case ki bech yechri toul
+    //get type to treat each differently, accessories don't have sizes
+    const productType : ProductType = this.product.type; 
 
     const { _id, name, type, price, images } = this.product;
     const image = images[0];
     this.productToAdd = { _id, name, type, price, image };
 
-    if (this.selectedSize != 'unselected') {
-      if (
-        this.product['availableQuantity'][this.selectedSize] >=
-        this.selectedQuantity
-      ) {
-        this.productToAdd['size'] = this.selectedSize;
+    if (productType === ProductType.ACCESSORIES) {
+      if (this.product.totalQuantity >= this.selectedQuantity) {
+        this.productToAdd['size'] = '-';
         this.productToAdd['quantity'] = this.selectedQuantity;
-        this.productToAdd['totalPrice'] =
-          this.selectedQuantity * this.productToAdd['price'];
-      } else {
+        this.productToAdd['totalPrice'] = this.selectedQuantity * this.productToAdd['price'];
+      }else {
         Swal.fire({
           icon: 'error',
           title: 'Insufficient Quantity',
           text: 'The specified quantity is unavailable !',
+          confirmButtonColor: 'darkgreen'
         });
         return; //TO DO : if condition isn't satisfied throw error with frontend
+
       }
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'No size selected',
-        text: 'Please select your size before proceeding further !',
-      });
-      return; //TO DO: if condition isn't satisfied throw error
+    }else {
+      if (this.selectedSize != 'unselected') {
+        if (
+          this.product['availableQuantity'][this.selectedSize] >=
+          this.selectedQuantity
+        ) {
+          this.productToAdd['size'] = this.selectedSize;
+          this.productToAdd['quantity'] = this.selectedQuantity;
+          this.productToAdd['totalPrice'] =
+            this.selectedQuantity * this.productToAdd['price'];
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Insufficient Quantity',
+            text: 'The specified quantity is unavailable !',
+            confirmButtonColor: 'darkgreen'
+          });
+          return; //TO DO : if condition isn't satisfied throw error with frontend
+        }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'No size selected',
+          text: 'Please select your size before proceeding further !',
+          confirmButtonColor: 'darkgreen'
+        });
+        return; //TO DO: if condition isn't satisfied throw error
+      }
     }
+    
     this.productService.setProductsToBuy([this.productToAdd]);
     console.log('buy now : ', this.productToAdd);
 

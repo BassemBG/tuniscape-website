@@ -28,7 +28,7 @@
     }
 }
 .summary{
-    background-color: #ddd;
+    background-color: #f0ede7;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     padding: 4vh;
@@ -114,7 +114,7 @@ input:focus::-webkit-input-placeholder
       color:transparent;
 }
 .btn{
-    background-color: #000;
+    background-color: rgb(1, 59, 1);
     border-color: #000;
     color: white;
     width: 100%;
