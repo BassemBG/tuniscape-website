@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://192.168.1.18:3000/',
-  apiUrlGetImage: 'http://192.168.1.18:3000/getimage/',
+  apiBaseUrl: 'http://192.168.1.18:2083/api/',
+  apiUrlGetImage: 'http://192.168.1.18:2083/api/getimage/',
 };
 
 /*
