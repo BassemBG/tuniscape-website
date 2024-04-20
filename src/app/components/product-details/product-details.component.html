@@ -3,16 +3,18 @@
 <div class="product-details-container">
     <div class="images-container">
         <div class="main-image">
+          <!--<img [src]="selectedImage" alt="{{ product.name }}">-->
           <img [src]=" apiUrlGetImage +  selectedImage" alt="{{ product.name }}">
         </div>
     
         <div class="other-images">
           <img *ngFor="let image of product.images" [src]=" apiUrlGetImage +  image" alt="{{ product.title }}" (click)="selectImage(image)">
+          <!--<img *ngFor="let image of product.images" [src]="image" alt="{{ product.title }}" (click)="selectImage(image)">-->
         </div>
       </div>
     
     <div class="details-container">
-      <h1>{{ product.name }}</h1>
+      <h2 class="fw-bold">{{ product.name }}</h2>
       <p class="price">{{ product.price }} TND</p>
       
       <div class="options">

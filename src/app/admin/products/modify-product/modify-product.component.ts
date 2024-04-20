@@ -25,7 +25,7 @@ export class ModifyProductComponent implements OnInit {
   ngOnInit(): void {
     this.receivedId = this.act.snapshot.paramMap.get('id');
 
-    this.productService.getProductById(this.receivedId).subscribe(
+    this.productService.getProductById(this.receivedId)!.subscribe(
       (res) => {
         console.log(res);
 

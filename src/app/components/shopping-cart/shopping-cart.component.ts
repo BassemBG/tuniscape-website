@@ -60,7 +60,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   deleteProduct(productId: number) {
-    console.log('deleting', productId);
+    console.log('deleting');
     Swal.fire({
       title: "Are you sure?",
       text: "The selected product will be deleted from your shopping cart.",
@@ -74,7 +74,6 @@ export class ShoppingCartComponent implements OnInit {
         this.cartProducts = this.cartProducts.filter(
           (product) => product._id !== productId
         );
-        console.log(this.cartProducts);
     
         this.productService.setCartProducts(this.cartProducts);
         Swal.fire({

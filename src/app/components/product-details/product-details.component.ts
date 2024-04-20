@@ -25,7 +25,6 @@ export class ProductDetailsComponent implements OnInit {
     private act: ActivatedRoute,
     @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string,
     private titleService: Title //used to update pages window titles
-
   ) {}
 
   ngOnInit(): void {
@@ -35,8 +34,6 @@ export class ProductDetailsComponent implements OnInit {
     //get product details
     this.productService.getProductById(this.receivedId).subscribe(
       (res) => {
-        console.log(res);
-
         this.product = res;
         this.titleService.setTitle(this.product.name);
 
@@ -84,9 +81,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart() {
-
     //get type to treat each differently, accessories don't have sizes
-    const productType : ProductType = this.product.type; 
+    const productType: ProductType = this.product.type;
 
     const { _id, name, type, price, images } = this.product;
     const image = images[0];
@@ -96,29 +92,29 @@ export class ProductDetailsComponent implements OnInit {
       if (this.product.totalQuantity >= this.selectedQuantity) {
         this.productToAdd['size'] = '-';
         this.productToAdd['quantity'] = this.selectedQuantity;
-        this.productToAdd['totalPrice'] = this.selectedQuantity * this.productToAdd['price'];
+        this.productToAdd['totalPrice'] =
+          this.selectedQuantity * this.productToAdd['price'];
         Swal.fire({
           icon: 'success',
           title: 'Added to Cart',
           text: 'Your product was succesfully added to cart !',
           confirmButtonText: 'Check my Cart',
-          confirmButtonColor: 'darkgreen'
+          confirmButtonColor: 'darkgreen',
         }).then((result) => {
           if (result.isConfirmed) {
             this.router.navigate(['cart']);
           }
         });
-      }else {
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'Insufficient Quantity',
           text: 'The specified quantity is unavailable !',
-          confirmButtonColor: 'darkgreen'
+          confirmButtonColor: 'darkgreen',
         });
         return; //TO DO : if condition isn't satisfied throw error with frontend
-
       }
-    }else {
+    } else {
       if (this.selectedSize != 'unselected') {
         if (
           this.product['availableQuantity'][this.selectedSize] >=
@@ -133,7 +129,7 @@ export class ProductDetailsComponent implements OnInit {
             title: 'Added to Cart',
             text: 'Your product was succesfully added to cart !',
             confirmButtonText: 'Check my Cart',
-            confirmButtonColor: 'darkgreen'
+            confirmButtonColor: 'darkgreen',
           }).then((result) => {
             if (result.isConfirmed) {
               this.router.navigate(['cart']);
@@ -144,7 +140,7 @@ export class ProductDetailsComponent implements OnInit {
             icon: 'error',
             title: 'Insufficient Quantity',
             text: 'The specified quantity is unavailable !',
-            confirmButtonColor: 'darkgreen'
+            confirmButtonColor: 'darkgreen',
           });
           return; //TO DO : if condition isn't satisfied throw error with frontend
         }
@@ -153,20 +149,20 @@ export class ProductDetailsComponent implements OnInit {
           icon: 'error',
           title: 'No size selected',
           text: 'Please select your size before proceeding further !',
-          confirmButtonColor: 'darkgreen'
+          confirmButtonColor: 'darkgreen',
         });
         return; //TO DO: if condition isn't satisfied throw error
       }
     }
-    
+
     this.productService.addCartProduct(this.productToAdd);
 
-    console.log('Added to cart:', this.productToAdd);
+    console.log('Added to cart');
   }
 
   buyNow(): void {
     //get type to treat each differently, accessories don't have sizes
-    const productType : ProductType = this.product.type; 
+    const productType: ProductType = this.product.type;
 
     const { _id, name, type, price, images } = this.product;
     const image = images[0];
@@ -176,18 +172,18 @@ export class ProductDetailsComponent implements OnInit {
       if (this.product.totalQuantity >= this.selectedQuantity) {
         this.productToAdd['size'] = '-';
         this.productToAdd['quantity'] = this.selectedQuantity;
-        this.productToAdd['totalPrice'] = this.selectedQuantity * this.productToAdd['price'];
-      }else {
+        this.productToAdd['totalPrice'] =
+          this.selectedQuantity * this.productToAdd['price'];
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'Insufficient Quantity',
           text: 'The specified quantity is unavailable !',
-          confirmButtonColor: 'darkgreen'
+          confirmButtonColor: 'darkgreen',
         });
         return; //TO DO : if condition isn't satisfied throw error with frontend
-
       }
-    }else {
+    } else {
       if (this.selectedSize != 'unselected') {
         if (
           this.product['availableQuantity'][this.selectedSize] >=
@@ -202,7 +198,7 @@ export class ProductDetailsComponent implements OnInit {
             icon: 'error',
             title: 'Insufficient Quantity',
             text: 'The specified quantity is unavailable !',
-            confirmButtonColor: 'darkgreen'
+            confirmButtonColor: 'darkgreen',
           });
           return; //TO DO : if condition isn't satisfied throw error with frontend
         }
@@ -211,14 +207,14 @@ export class ProductDetailsComponent implements OnInit {
           icon: 'error',
           title: 'No size selected',
           text: 'Please select your size before proceeding further !',
-          confirmButtonColor: 'darkgreen'
+          confirmButtonColor: 'darkgreen',
         });
         return; //TO DO: if condition isn't satisfied throw error
       }
     }
-    
+
     this.productService.setProductsToBuy([this.productToAdd]);
-    console.log('buy now : ', this.productToAdd);
+    console.log('buy now Done');
 
     this.router.navigate(['checkout']);
   }

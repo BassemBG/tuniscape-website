@@ -9,18 +9,17 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-
   checkoutForm: FormGroup;
   isSubmitted: boolean = false;
   addedProducts: any[] = [];
   order: any = {};
-  deliveryFee : number = 7; // Fixed delivery fee
-  totalWithoutDelivery : number = 0;
-  grandTotal : number = 0;
-  pageTitle: string = "Tuniscape Prod - Checkout";
+  deliveryFee: number = 7; // Fixed delivery fee
+  totalWithoutDelivery: number = 0;
+  grandTotal: number = 0;
+  pageTitle: string = 'Tuniscape Prod - Checkout';
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
@@ -28,9 +27,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string,
     private titleService: Title //used to update pages window titles
-
   ) {
-    
     this.checkoutForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -47,18 +44,16 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.addedProducts = this.productService.getProductsToBuy();
-    console.log(this.addedProducts);
     this.calculateTotal();
     this.titleService.setTitle(this.pageTitle);
   }
 
   // Calculate totals (without delivery then grand total)
-  calculateTotal(){
+  calculateTotal() {
     for (const product of this.addedProducts) {
-      this.totalWithoutDelivery += product["totalPrice"];
+      this.totalWithoutDelivery += product['totalPrice'];
     }
     this.grandTotal = this.totalWithoutDelivery + this.deliveryFee;
-
   }
 
   /*checkInvalidInput(inputName: String){
@@ -81,20 +76,18 @@ export class CheckoutComponent implements OnInit {
       console.log('Form submitted');
       this.order['customerInfos'] = this.checkoutForm.value;
       this.order['products'] = this.addedProducts;
-      console.log(this.order);
-  
-  
+
       this.orderService.addOrder(this.order).subscribe(
         (res) => {
-          console.log('Order placed successfully:', res);
+          console.log('Order placed successfully');
           this.productService.resetCartProducts();
           this.productService.resetProductsToBuy();
           Swal.fire({
             icon: 'success',
             title: 'Order Confirmation',
             text: 'Your Order has been placed ! You will receive a confirmation email shortly !',
-            confirmButtonColor: 'darkgreen'
-          }).then((result) => {          
+            confirmButtonColor: 'darkgreen',
+          }).then((result) => {
             if (result.isConfirmed) {
               this.router.navigate(['/']);
             }
@@ -106,17 +99,14 @@ export class CheckoutComponent implements OnInit {
             icon: 'error',
             title: 'Order Failure',
             text: err.error.error,
-            confirmButtonColor: 'darkgreen'
-          }).then((result) => {          
+            confirmButtonColor: 'darkgreen',
+          }).then((result) => {
             if (result.isConfirmed) {
               this.router.navigate(['/']);
             }
           });
         }
       );
-  
     }
   }
-
-
 }

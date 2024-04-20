@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: '192.168.1.18:2083/api/',
-  apiUrlGetImage: '192.168.1.18:2083/api/getimage/',
+  apiBaseUrl: 'http://node16861-env-5845845.my.p4d.click:2083/api/',
+  apiUrlGetImage: 'http://node16861-env-5845845.my.p4d.click:2083/api/getimage/',
 };

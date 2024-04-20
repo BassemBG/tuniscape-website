@@ -3,10 +3,9 @@ import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
   url = this.apiBaseUrl + 'products/';
 
   constructor(
@@ -30,7 +29,47 @@ export class ProductService {
 
   //this is used as cache, we will save products here and only query db once
   private productCache: any = {};
-
+  /*private products: any[] = 
+  [
+    {  
+      _id: "1",
+      name: "Clothing test",
+      type: "clothing",
+      description: "test",
+      price: 120,
+      availableQuantity: {
+          XS: 0,
+          S: 10,
+          M: 0,
+          L: 0,
+          XL: 0
+      },
+      totalQuantity: 10,
+      images: [
+        "../assets/instagram.png",
+        "../assets/logo.png"
+      ]
+    },
+    {
+      _id: "2",
+      name: "Merch test",
+      type: "merch",
+      description: "test",
+      price: 120,
+      availableQuantity: {
+          XS: 0,
+          S: 0,
+          M: 0,
+          L: 0,
+          XL: 0
+      },
+      totalQuantity: 0,
+      images: [
+        "../assets/devant-social distance-nature.jpeg",
+        "../assets/dos-social distance-nature.jpeg"
+      ]
+    }
+  ]*/
 
   getSelectedProductType(): Observable<string> {
     return this.selectedCategorySubject.asObservable();
@@ -43,33 +82,46 @@ export class ProductService {
   //make api call to get all products from DB
   getAllProducts() {
     //const headers = new HttpHeaders().set('ngrok-skip-browser-warning', 'true');
-    if (this.productCache['allProducts']) {
-      return of(this.productCache['allProducts']);
-    } else {
 
-    return this.http.get(this.url + 'getall',/* { headers }*/).pipe(
-      tap(products => {
+    //return of(this.products);
+
+    //it should work with backend, this is potential solution
+    return this.http.get(this.url + 'getall').pipe(
+      tap((products) => {
         this.productCache['allProducts'] = products;
       })
     );
-    }
   }
 
   getProductsByType(type: string): Observable<any[]> {
+    //let productsToShow : any[] = [];
     if (this.productCache[type]) {
       return of(this.productCache[type]);
     } else {
+      /*for (const product of this.products) {
+        if (product.type === type) {
+          productsToShow.push(product);
+        }
+      }
+      return of(productsToShow);*/
+
+      //it should work with backend, this is potential solution
 
       return this.http.get<any[]>(`${this.url}getall?type=${type}`).pipe(
-        tap(products => {
+        tap((products) => {
           this.productCache[type] = products;
         })
       );
-    
     }
   }
 
   getProductById(id: any) {
+    /*for (const product of this.products) {
+      if (product._id == id) {        
+        return of(product);
+      }
+    }
+    return of(null)*/
     return this.http.get(this.url + 'getbyid/' + id);
   }
 
@@ -81,9 +133,9 @@ export class ProductService {
     return this.http.post(this.url + 'add', product);
   }
 
-  updateProduct(productId : any, newProductData: any) {
+  updateProduct(productId: any, newProductData: any) {
     console.log(newProductData);
-    
+
     return this.http.put(this.url + 'update/' + productId, newProductData);
   }
 
@@ -98,7 +150,6 @@ export class ProductService {
     return this.selectedProduct;
   }*/
 
-
   //used to get data to modify-product components (admin side)
   setAdminProductDetails(product: any) {
     this.adminProductDetails = product;
@@ -112,12 +163,12 @@ export class ProductService {
   setCartProducts(modifiedCartProducts: any) {
     this.totalNotifQuantity = 0;
     this.cartProducts = modifiedCartProducts;
-    console.log('modified: ', modifiedCartProducts);
+    console.log('cart products modified');
     let newQuantity = 0;
     for (const cartProduct of modifiedCartProducts) {
-      console.log('product modified : ', cartProduct);
+      console.log('cart product modified');
 
-      newQuantity += cartProduct['quantity'];      
+      newQuantity += cartProduct['quantity'];
     }
     this.updateCartQuantityNotif(newQuantity);
   }
@@ -137,7 +188,6 @@ export class ProductService {
       this.cartProducts,
       cartProduct._id
     );
-    console.log('product indexes : ', productIndexes);
 
     if (productIndexes.length != 0) {
       console.log('product is already in cart');
@@ -158,10 +208,6 @@ export class ProductService {
 
       //if the same size, only update quantity
       if (!Number.isNaN(productIdWithSameSize)) {
-        console.log(
-          'product id to change quantity of: ',
-          productIdWithSameSize
-        );
         let quantity = cartProduct['quantity'];
         this.cartProducts[productIdWithSameSize]['quantity'] += quantity;
         this.cartProducts[productIdWithSameSize]['totalPrice'] +=
@@ -177,7 +223,7 @@ export class ProductService {
       this.cartProducts.push(cartProduct);
     }
     this.updateCartQuantityNotif(cartProduct['quantity']);
-    console.log('cart products : ', this.cartProducts);
+    console.log('added to cart products ');
   }
 
   updateCartQuantityNotif(newQuantity: number): void {

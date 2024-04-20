@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'tuniscape';
+  title = 'Tuniscape Production';
 
   isAdminRoute: boolean = false;
   isLoginRoute: boolean = false;
@@ -19,11 +19,6 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         this.isAdminRoute = event.urlAfterRedirects.startsWith('/admin');
         this.isLoginRoute = event.urlAfterRedirects.startsWith('/login');
-        console.log(event);
-
-        console.log(this.isAdminRoute);
-        console.log(this.isLoginRoute);
-        
       }
     });
   }

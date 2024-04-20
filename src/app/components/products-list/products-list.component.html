@@ -11,6 +11,7 @@
         <div *ngFor="let product of products" class="product-card col-md-3 p-2 p-md-5 col-6 text-center h-100" (click)="viewDetails(product)">
         
           <img [src]="apiUrlGetImage + product.images[0]" alt="{{ product.name }}">
+          <!--<img [src]="product.images[0]" alt="{{ product.name }}">-->
           <h5 class="product-price">{{ product.price }} DT</h5>
           <h2 class="product-name">{{ product.name }}</h2>
 
