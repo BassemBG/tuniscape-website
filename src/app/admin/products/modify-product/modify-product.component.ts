@@ -83,34 +83,7 @@ export class ModifyProductComponent implements OnInit {
 
   fileToUpload: any;
   imageUrl: any;
-  /*onFileChange(event: any): void {
-    const files: File[] = event.target.files;
 
-
-    if (files && files.length) {
-      // Clear existing selectedImages  array
-      this.selectedImages  = [];
-
-      // Loop through selected files and add them to FormArray
-      for (const file of files) {
-        //Show image preview
-        let reader = new FileReader();
-
-        reader.onload = (event: any) => {
-          this.imageUrl = event.target.result;
-          this.selectedImages.push(this.imageUrl);
-        }
-        reader.readAsDataURL(file);
-      }
-      this.productForm.get('images')?.setValue(files);
-      this.isSelectedImages = true;
-
-    }    
-  }
-*/
-
-
-  //--------------------------
   onFileChange(event: any): void {
     const files: FileList = event.target.files;
     const filePromises: Promise<any>[] = [];
@@ -150,8 +123,8 @@ export class ModifyProductComponent implements OnInit {
       reader.readAsDataURL(file); // Read file as data URL
     });
   }
-  //--------------------
 
+  
   submitForm() {
     // Handle form submission logic
     console.log( "product form data before: " , this.productForm.value.name);

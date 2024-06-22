@@ -73,8 +73,19 @@
       <label>Images:</label>
       <input type="file" (change)="onFileChange($event)" multiple accept="image/*">
     
+    <!-- Display newly selected images -->
+    <div *ngIf="selectedImages.length > 0" class="row mb-5">
+
+        <h2 class="col-12">Selected Images to add:</h2>
+        <div *ngFor="let image of selectedImages.reverse()" class="col-2">
+            <img class=" w-100" [src]="image" alt="Selected Product Image">
+        </div>
+    </div>
+
       <button type="submit" [disabled]="productForm.invalid">Submit</button>
     </form>
+
+    
     
 
 </div>

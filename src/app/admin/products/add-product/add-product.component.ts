@@ -13,8 +13,10 @@ import Swal from 'sweetalert2';
 export class AddProductComponent implements OnInit {
   productForm: FormGroup;
   isSubmitted: boolean = false;
+  selectedImages : File[] = []; // Store uploaded selectedImages 
   images: File[] = []; // Store uploaded images
   productTypes = Object.values(ProductType); // this is used for menu of types 
+  isSelectedImages: boolean = false;  //this tells us if images will be changed or not
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,6 +42,7 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /*
   onFileChange(event: any): void {
     const files: File[] = event.target.files;
     // Clear existing images array
@@ -51,6 +54,52 @@ export class AddProductComponent implements OnInit {
     // Update the images form control value
     this.productForm.get('images')?.setValue(this.images);
   }
+    */
+
+
+  //--------------------------------------------------
+
+  onFileChange(event: any): void {
+    const files: FileList = event.target.files;
+    const filePromises: Promise<any>[] = [];
+  
+    if (files && files.length) {
+      // Clear existing selectedImages array
+      this.selectedImages = [];
+  
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        // Push a promise to the array to read each file asynchronously
+        filePromises.push(this.readFile(file));
+      }
+  
+      // Resolve all promises sequentially
+      Promise.all(filePromises)
+        .then((results) => {
+          // 'results' will contain the ordered array of image URLs or base64 strings
+          this.selectedImages = results;
+          this.productForm.get('images')?.setValue(files); // Update form control with files
+          this.isSelectedImages = true; // Set flag to indicate images are selected
+        })
+        .catch((error) => {
+          console.error('Error reading files:', error);
+        });
+    }
+  }
+  
+  // Helper function to read each file asynchronously
+  readFile(file: File): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        resolve(event.target.result); // Resolve with the result (URL or base64 string)
+      };
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file); // Read file as data URL
+    });
+  }
+
+  //--------------------------------------------------
 
   submitForm() {
     // Handle form submission logic
@@ -83,8 +132,12 @@ export class AddProductComponent implements OnInit {
     }
 
     // Append each image file
-    for (let i = 0; i < this.images.length; i++) {
-      formData.append('images', this.images[i]);
+    const images = this.productForm.value.images;
+    
+    if (images.length > 0 && this.isSelectedImages) {
+      for (const image of images) {
+        formData.append('images', image);        
+      }
     }
 
     if (this.productForm.valid) {
