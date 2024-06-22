@@ -41,10 +41,7 @@ export class ModifyProductComponent implements OnInit {
         console.log(err);
       }
     );
-  
-    
-
-  }
+}
 
   initForm(): void {
     this.productForm = this.formBuilder.group({
@@ -116,7 +113,8 @@ export class ModifyProductComponent implements OnInit {
 
   submitForm() {
     // Handle form submission logic
-
+    console.log( "product form data before: " , this.productForm.value.name);
+    
     const formData = new FormData();
     formData.append('name', this.productForm.value.name);
     formData.append('type', this.productForm.value.type);
@@ -128,17 +126,19 @@ export class ModifyProductComponent implements OnInit {
     );
 
     // Append images
+    
     const images = this.productForm.value.images;
     
-    if (images.length > 0) {
+    if (images.length > 0 && this.isSelectedImages) {
       for (const image of images) {
         formData.append('images', image);        
       }
     }
+    
 
     
     if (this.productForm.valid) {
-      console.log('Form submitted');
+      console.log('Form is valid');
     }
     
     console.log("product data to update with: ");

@@ -80,7 +80,6 @@ export class AddProductComponent implements OnInit {
 
       formData.append('totalQuantity', sum.toString());
 
-      
     }
 
     // Append each image file
