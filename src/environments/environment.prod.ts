@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://www.tuniscape-prod.shop/api/',
+  apiBaseUrl: 'https://www.tuniscape-prod.com/api/',
   apiUrlGetImage:
-    'https://www.tuniscape-prod.shop/api/getimage/',
+    'https://www.tuniscape-prod.com/api/getimage/',
 };
