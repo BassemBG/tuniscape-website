@@ -24,6 +24,10 @@ export class ProductsComponent implements OnInit {
     );
   }
 
+  get count() {
+    return this.products.length;
+  }
+
   deleteProduct(productId: String) {
     Swal.fire({
       title: 'Are you sure?',
