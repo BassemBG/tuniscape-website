@@ -1,3 +1,5 @@
+<!--
+
 <div class="container-fluid ">
     <div class="row">
         <nav class="sidebar col-sm-3 col-md-2">
@@ -13,4 +15,28 @@
     </div>
 </div>
 
-  
+-->
+
+
+
+
+
+
+<!-- app.component.html -->
+<div class="navbar">
+  <div class="menu-toggle" (click)="toggleMenu()">☰</div>
+
+    <div class="menu-overlay" [ngClass]="{'show-menu': isMenuOpen}" (click)="closeMenu()">
+    <div class="menu" [ngClass]="{'show-menu': isMenuOpen, 'text-black': isScrolled}">
+      <a [routerLink]="['orders']" class="fw-bold" >Orders</a>
+      <a [routerLink]="['products']" class="fw-bold">Products</a>
+      <a (click)="logOut()" class="fw-bold" >Logout</a>
+      <!-- Add more menu items as needed -->
+    </div>
+  </div>
+
+</div>
+
+<div class="col-12 p-md-5 p-3">
+  <router-outlet class="overflow-auto"></router-outlet>
+</div>

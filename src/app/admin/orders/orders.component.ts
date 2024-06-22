@@ -37,4 +37,11 @@ export class OrdersComponent implements OnInit {
     return totalWithoutDelivery + deliveryFee;
 
   }
+
+
+  get count() {
+    return this.orders.length;
+  }
+
+
 }

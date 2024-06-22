@@ -8,6 +8,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
+  isScrolled: boolean = false;
+  isMenuOpen = false;
+  isHomeComponent: boolean = false;
+
+
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -16,5 +21,16 @@ export class DashboardComponent implements OnInit {
   logOut(){
     this.auth.logOut();
   }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    console.log(this.isMenuOpen);
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
+
 
 }

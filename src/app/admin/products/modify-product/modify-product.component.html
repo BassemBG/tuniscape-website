@@ -1,12 +1,18 @@
 <div class="form-container">
     <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="text-center">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label>Name:</label>
                 <input type="text" formControlName="name" required>
           
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-4">
+                <label>Price:</label>
+                <input type="number" formControlName="price" required>          
+            </div>
+
+            <div class="col-md-4">
                 <label>Type:</label>
                 <select id="type" formControlName="type" required>
                     <option *ngFor="let type of productTypes" [value]="type">{{ type }}</option>
@@ -17,22 +23,16 @@
         <div class="row">
             <div class="col-12">
                 <label>Description:</label>
-                <textarea cols="120" rows="10" formControlName="description">
+                <textarea class="w-100" rows="10" formControlName="description">
                 </textarea>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-12">
-                <label>Price:</label>
-                <input type="number" formControlName="price" class="w-50" required>          
-            </div>
-        </div>
+     
     
         <div class="row">
             <div class="col-12">
                 <label>Quantity / Stock:</label>
-                <div formGroupName="availableQuantity">
+                <div formGroupName="availableQuantity" *ngIf="productForm.get('type')?.value !== 'accessories'; else showAccessoriesQuantity">
                     <div class="row">
                         <div class="col-md-2 col-6">
                             <label>XS</label>
@@ -56,6 +56,14 @@
                         </div>
                     </div>
                 </div>
+                <ng-template #showAccessoriesQuantity>
+                    <div class="row">
+                        <div class="col text-center">
+                            <label>Quantity</label>
+                            <input type="number" formControlName="totalQuantity" placeholder="Quantity" required>
+                        </div>
+                    </div>
+                </ng-template>
             </div>
         </div>
     
@@ -70,7 +78,7 @@
         <div *ngIf="!isSelectedImages" class="row mb-5">
 
             <h2 class="col-12">Existing Images:</h2>
-            <div *ngFor="let image of productForm.value.images.reverse()" class="col-2">
+            <div *ngFor="let image of productForm.value.images.reverse()" class="col-md-2 col-4">
                 <img class=" w-100" [src]="apiUrlGetImage + image" alt="Product Image">
             </div>
         </div>
@@ -79,7 +87,7 @@
         <div *ngIf="selectedImages.length > 0" class="row mb-5">
 
             <h2 class="col-12">Newly Selected Images that will replace the existing images:</h2>
-            <div *ngFor="let image of selectedImages.reverse()" class="col-2">
+            <div *ngFor="let image of selectedImages.reverse()" class="col-md-2 col-4">
                 <img class=" w-100" [src]="image" alt="Selected Product Image">
             </div>
         </div>

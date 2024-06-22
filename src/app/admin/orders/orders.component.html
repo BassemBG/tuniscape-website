@@ -4,8 +4,8 @@
     </div>
     
 </div>
-<div class="row p-3">
-    <table class="table">
+<div class="row p-3 table-responsive">
+    <table class="table text-center table-striped table-bordered table-hover table-sm">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -18,9 +18,9 @@
             <th scope="col">Operation</th>
           </tr>
         </thead>
-        <tbody *ngFor="let order of orders; let i = index">
+        <tbody *ngFor="let order of orders; let i = index;">
           <tr>
-            <th scope="row">{{i}}</th>
+            <th scope="row">{{ count - i}}</th>
             <td>{{ order.customerInfos.firstName }} {{ order.customerInfos.lastName }}</td>
             <td>{{ order.customerInfos.postalCode}} {{ order.customerInfos.city }} {{ order.customerInfos.address }}</td>
             <td> {{ order.customerInfos.phone }} </td>
@@ -41,4 +41,3 @@
         </tbody>
       </table>
 </div>
-

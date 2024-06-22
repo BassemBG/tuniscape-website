@@ -56,6 +56,7 @@ export class ModifyProductComponent implements OnInit {
         L: ['', Validators.required],
         XL: ['', Validators.required],
       }),
+      totalQuantity: [0, Validators.required],
       images: [], // Assuming it's optional
     });
   }
@@ -75,6 +76,7 @@ export class ModifyProductComponent implements OnInit {
           L: productDetails.availableQuantity.L,
           XL: productDetails.availableQuantity.XL,
         },
+        totalQuantity: productDetails.totalQuantity,
         images: productDetails.images,
       });
     }
@@ -124,7 +126,7 @@ export class ModifyProductComponent implements OnInit {
     });
   }
 
-  
+
   submitForm() {
     // Handle form submission logic
     console.log( "product form data before: " , this.productForm.value.name);

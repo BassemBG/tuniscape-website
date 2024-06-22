@@ -1,4 +1,4 @@
-<div class="content pt-5">
+<div class="content">
     <div class="row">
         <div class="col">
             <h1 class="title">Products</h1>
@@ -7,8 +7,8 @@
             <button (click)="goToAddPage()" class="btn btn-success w-auto">+ Add product</button>
         </div>
     </div>
-    <div class="row p-3">
-        <table class="table text-center">
+    <div class="row p-3 table-responsive ">
+        <table class="table text-center table-striped table-bordered table-hover table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -37,8 +37,8 @@
                 </td>
                 <td> {{ product.totalQuantity }} </td>
                 <td>
-                    <button (click)="deleteProduct(product._id)" class="btn btn-danger fw-bold">Delete</button>    
-                    <button (click)="goToModifyPage(product)" class="btn btn-info fw-bold">Modify</button>
+                  <button (click)="goToModifyPage(product)" class="btn btn-info fw-bold me-md-2">Modify</button>
+                  <button (click)="deleteProduct(product._id)" class="btn btn-danger fw-bold ms-md-2">Delete</button>    
                 </td>
               </tr>
             </tbody>

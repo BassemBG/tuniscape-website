@@ -1,5 +1,5 @@
-.sidebar {
-    height: 100vh; /* Adjust height as needed */
+/*.sidebar {
+    height: 100vh; 
     background-color: black;
     padding: 20px;
     
@@ -22,7 +22,6 @@
     display: block;
   }
   
-  /* Optional: Add hover effects */
   .nav-links a:hover {
     background-color: #e0e0e0;
     color: black;
@@ -31,3 +30,83 @@
   .content {
     height: 100vh;
   }
+*/
+
+
+
+
+
+
+
+
+  
+
+    
+  .menu-toggle {
+    padding: 10px;
+    font-size: 24px;
+    color: green;
+    cursor: pointer;
+  }
+
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #f0ede7;
+    color: green;
+    padding: 10px;
+    text-align: center;
+    transition: left 1s ease; /* Slide transition effect */
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.5); /* Add box shadow for better visibility */
+  
+  }
+
+  
+  .menu a {
+    color: green;
+    text-decoration: none;
+    padding: 10px;
+    transition: 0.7s ease;
+    cursor: pointer;
+    
+  }
+  
+  .menu a:hover {
+    text-decoration: underline;
+  }
+  
+
+  .menu-overlay {
+    display: none; /* Initially hide the overlay */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 1; /* Place the overlay under the menu */
+  }
+
+  .menu.show-menu {
+    display: flex; /* Display the menu when the class is applied */
+    left: 0px;
+    transition: left 1s ease; /* Slide transition effect */
+  }
+
+  .menu-overlay.show-menu {
+    display: block; /* Display the overlay when the menu is shown */
+  }
+
+  @media only screen and (max-width: 768px) {
+  
+    .menu {
+      width: 55%;
+    }
+  
+  }
+  

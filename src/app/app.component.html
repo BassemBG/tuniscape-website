@@ -1,4 +1,8 @@
-<app-header *ngIf="!isAdminRoute && !isLoginRoute"></app-header>
+<div class="wrapper" *ngIf="!isAdminRoute && !isLoginRoute">
+    <app-announcement-bar></app-announcement-bar>
+
+    <app-header></app-header>    
+</div>
 
 <router-outlet></router-outlet>
 
