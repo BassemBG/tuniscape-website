@@ -19,6 +19,10 @@ export class ProductDetailsComponent implements OnInit {
   sizeNames: string[] = [];
   isOutOfStock: Boolean = false;
   receivedId: any;
+  formattedDescription: string = ''; //used to display description with back to lines
+
+
+
   constructor(
     private productService: ProductService,
     private router: Router,
@@ -35,6 +39,9 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getProductById(this.receivedId).subscribe(
       (res) => {
         this.product = res;
+
+        this.formatDescription(this.product.description);
+
         this.titleService.setTitle(this.product.name);
 
         //setting the ui stuff only when product is loaded: sizes, out of stock visibility, main image
@@ -66,6 +73,12 @@ export class ProductDetailsComponent implements OnInit {
 
     //this.product = this.productService.getSelectedProduct();
   }
+
+  //format desc to show back to lines
+  formatDescription(description: string): void {
+    this.formattedDescription = description.replace(/\n/g, '<br>');
+  }
+
 
   increaseQuantity() {
     // TO DO: add condition to not pass the maximum available quantity
