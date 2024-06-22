@@ -8,15 +8,17 @@
             </div>
             <div class="col-md-6">
                 <label>Type:</label>
-                <input type="text" formControlName="type" required>
-          
+                <select id="type" formControlName="type" required>
+                    <option *ngFor="let type of productTypes" [value]="type">{{ type }}</option>
+                </select>
             </div>
         </div>
     
         <div class="row">
             <div class="col-12">
                 <label>Description:</label>
-                <input type="text" formControlName="description">
+                <textarea cols="120" rows="10" formControlName="description">
+                </textarea>
             </div>
         </div>
         
@@ -64,5 +66,24 @@
       <button type="submit" [disabled]="productForm.invalid">Submit</button>
     </form>
     
+        <!-- Display existing images -->
+        <div *ngIf="!isSelectedImages" class="row mb-5">
 
+            <h2 class="col-12">Existing Images:</h2>
+            <div *ngFor="let image of productForm.value.images" class="col-2">
+                <img class=" w-100" [src]="apiUrlGetImage + image" alt="Product Image">
+            </div>
+        </div>
+
+        <!-- Display newly selected images -->
+        <div *ngIf="selectedImages.length > 0" class="row mb-5">
+
+            <h2 class="col-12">Newly Selected Images that will replace the existing images:</h2>
+            <div *ngFor="let image of selectedImages" class="col-2">
+                <img class=" w-100" [src]="image" alt="Selected Product Image">
+            </div>
+        </div>
+
+
+    
 </div>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductType } from 'src/app/shared/enums/productType.enum';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,59 +11,107 @@ import Swal from 'sweetalert2';
   styleUrls: ['./modify-product.component.css'],
 })
 export class ModifyProductComponent implements OnInit {
-  productForm: FormGroup = this.formBuilder.group({});
+  productForm!: FormGroup;
   isSubmitted: boolean = false;
-  images: File[] = []; // Store uploaded images
+  selectedImages : File[] = []; // Store uploaded selectedImages 
   productDetails: any;
   receivedId: any;
+  productTypes = Object.values(ProductType); // this is used for menu of types 
+  isSelectedImages: boolean = false;  //this tells us if images will be changed or not
+
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
     private act: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    @Inject('API_URL_GET_IMAGE') public apiUrlGetImage: string
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.initForm(); // Initialize productForm here if needed
+
     this.receivedId = this.act.snapshot.paramMap.get('id');
 
     this.productService.getProductById(this.receivedId)!.subscribe(
       (res) => {
         console.log(res);
-
-        this.productDetails = res;
-        this.productForm = this.formBuilder.group({
-          name: [this.productDetails.name, Validators.required],
-          type: [this.productDetails.type, Validators.required],
-          description: [this.productDetails.description],
-          price: [this.productDetails.price, Validators.required],
-          availableQuantity: this.formBuilder.group({
-            XS: [this.productDetails.availableQuantity.XS, Validators.required],
-            S: [this.productDetails.availableQuantity.S, Validators.required],
-            M: [this.productDetails.availableQuantity.M, Validators.required],
-            L: [this.productDetails.availableQuantity.L, Validators.required],
-            XL: [this.productDetails.availableQuantity.XL, Validators.required],
-          }),
-          images: [this.productDetails.images], // required?
-        });
+        this.populateForm(res); // Populate the form with fetched data
       },
       (err) => {
         console.log(err);
       }
     );
+  
+    
 
-    //this.productDetails = this.productService.getAdminProductDetails(); this is deleted because id is passed in url
   }
 
+  initForm(): void {
+    this.productForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      type: ['', Validators.required],
+      description: [''],
+      price: ['', Validators.required],
+      availableQuantity: this.formBuilder.group({
+        XS: ['', Validators.required],
+        S: ['', Validators.required],
+        M: ['', Validators.required],
+        L: ['', Validators.required],
+        XL: ['', Validators.required],
+      }),
+      images: [], // Assuming it's optional
+    });
+  }
+
+
+  populateForm(productDetails: any): void {
+    if (productDetails) {
+      this.productForm.patchValue({
+        name: productDetails.name,
+        type: productDetails.type,
+        description: productDetails.description,
+        price: productDetails.price,
+        availableQuantity: {
+          XS: productDetails.availableQuantity.XS,
+          S: productDetails.availableQuantity.S,
+          M: productDetails.availableQuantity.M,
+          L: productDetails.availableQuantity.L,
+          XL: productDetails.availableQuantity.XL,
+        },
+        images: productDetails.images,
+      });
+    }
+  }
+
+
+  fileToUpload: any;
+  imageUrl: any;
   onFileChange(event: any): void {
     const files: File[] = event.target.files;
-    // Clear existing images array
-    this.images = [];
-    // Loop through uploaded files and add them to the images array
-    for (let i = 0; i < files.length; i++) {
-      this.images.push(files[i]);
+
+
+    if (files && files.length) {
+      // Clear existing selectedImages  array
+      this.selectedImages  = [];
+
+      // Loop through selected files and add them to FormArray
+      for (const file of files) {
+        //Show image preview
+        let reader = new FileReader();
+
+        reader.onload = (event: any) => {
+          this.imageUrl = event.target.result;
+          this.selectedImages.push(this.imageUrl);
+        }
+        reader.readAsDataURL(file);
+      }
+      this.productForm.get('images')?.setValue(files);
+      this.isSelectedImages = true;
+
     }
-    // Update the images form control value
-    this.productForm.get('images')?.setValue(this.images);
+
+
+    
   }
 
   submitForm() {
@@ -77,25 +126,33 @@ export class ModifyProductComponent implements OnInit {
       'availableQuantity',
       JSON.stringify(this.productForm.value.availableQuantity)
     );
-    // Append each image file
-    for (let i = 0; i < this.images.length; i++) {
-      formData.append('images', this.images[i]);
+
+    // Append images
+    const images = this.productForm.value.images;
+    
+    if (images.length > 0) {
+      for (const image of images) {
+        formData.append('images', image);        
+      }
     }
 
+    
     if (this.productForm.valid) {
       console.log('Form submitted');
     }
-    //let productToAdd = this.productForm.value;
+    
+    console.log("product data to update with: ");
     console.log(formData);
 
     this.isSubmitted = true;
     
     this.productService
-      .updateProduct(this.productDetails._id, formData)
-      .subscribe(
+      .updateProduct(this.receivedId, formData)
+      .subscribe( 
         (res) => {
           console.log('Product updated successfully:', res);
           this.productForm.reset();
+          this.productForm.value.images = [];
           Swal.fire({
             icon: 'success',
             title: 'Product is updated !',

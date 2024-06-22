@@ -134,7 +134,6 @@ export class ProductService {
   }
 
   updateProduct(productId: any, newProductData: any) {
-    console.log(newProductData);
 
     return this.http.put(this.url + 'update/' + productId, newProductData);
   }
