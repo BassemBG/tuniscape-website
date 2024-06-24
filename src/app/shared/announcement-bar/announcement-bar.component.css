@@ -1,8 +1,8 @@
 .announcement-bar {
     background-color: black;
-    color: greenyellow;
+    color: gold;
     text-align: center;
-    padding: 5px 0;
+    padding: 8px 0;
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
@@ -24,4 +24,3 @@
       transform: translateX(-100%);
     }
   }
-  

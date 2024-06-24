@@ -1,15 +1,13 @@
 .banner {
-    height: 80vh;
+    height: 85vh;
     display: flex;
     align-items: center;
     color: black;
-    overflow: hidden;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); /* Add box shadow for better visibility */
-    background-image: url('../../../assets/BANNER-WEB-SITE-min-size.png'); /* Replace with your image path */
+    background-image: url('../../../assets/BANNER-desktop-banner.png'); /* Replace with your image path */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-bottom: 0px;
   }
   
   .text-container {
@@ -48,9 +46,9 @@
     .banner {
         padding-top: 2.5em;
         align-items: flex-start;
-        height: 60vh;
-        background-image: url('../../../assets/banner-web-site-phone-min-size.png'); /* Replace with your image path */
-        background-position: bottom;
+        height: 70vh;
+        background-image: url('../../../assets/BANNER-phone-banner.png'); /* Replace with your image path */
+        background-position: top;
 
       }
 

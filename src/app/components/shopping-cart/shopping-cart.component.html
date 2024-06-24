@@ -1,15 +1,18 @@
 <div class="container-fluid">
     <div *ngIf="cartProducts.length == 0" class="col-md-12 cart">
-        <div class="empty-container">
-            <div class="row text-center empty">
-                <h1>Your shopping Cart is Empty</h1>
-            </div>
-            <div class="row empty">
+        <div class="empty-container d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <div class="row empty">
+                    <h1>Your shopping Cart is Empty</h1>
+                </div>
+                <div class="row empty">
                     <h2 class="text-center text-muted"><a [routerLink]="['/']">&leftarrow;Back to shop</a></h2>
+                </div>
             </div>
+            
         </div> 
     </div>
-    <div class="row" *ngIf="cartProducts.length > 0">
+    <div class="row cart-info" *ngIf="cartProducts.length > 0">
         <div  class="col-md-8 cart">
             <div class="title">
                 <div class="row">
